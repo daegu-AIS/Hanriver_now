@@ -1,6 +1,6 @@
 # hanriver_now
 
-A new Flutter project.
+서울 열린데이터 광장 공공데이터 활용 모바일 앱/웹 경진대회
 
 ## Getting Started
 
