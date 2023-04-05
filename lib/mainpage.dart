@@ -39,7 +39,13 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MainPage'),
+        title: Text(
+          '한강은 지금',
+          style: TextStyle(
+              fontFamily: 'EastSeaDokdo', fontSize: 40, color: Colors.black),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
