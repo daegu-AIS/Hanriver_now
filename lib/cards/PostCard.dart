@@ -1,6 +1,24 @@
+import 'dart:convert';
 import 'dart:math';
-
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+class ApiTest {
+  final String name;
+  final String photo;
+
+  ApiTest({required this.name, required this.photo});
+
+  ApiTest.fromJson(List<dynamic> json, int index)
+      : name = json[index]['contentid'],
+        photo = json[index]['firstimage'];
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'photo': photo,
+      };
+}
 
 class PostCard extends StatefulWidget {
   int number;
@@ -10,7 +28,23 @@ class PostCard extends StatefulWidget {
   _PostCardState createState() => _PostCardState();
 }
 
+// jMXX6HpoTlWX73RSA8DY2Bcz6nQfa1wI34sfnXo0JSjZW/qC1C+1/moHMaEsN5IQagpIoVRHDQdDhyy3cB1qkQ==
+
 class _PostCardState extends State<PostCard> {
+  final String apiUrl =
+      'https://apis.data.go.kr/B551011/KorService1/searchFestival1?numOfRows=10&pageNo=1&MobileOS=AND&MobileApp=MobileApp&_type=json&eventStartDate=20230410&serviceKey=jMXX6HpoTlWX73RSA8DY2Bcz6nQfa1wI34sfnXo0JSjZW%2FqC1C%2B1%2FmoHMaEsN5IQagpIoVRHDQdDhyy3cB1qkQ%3D%3D';
+
+  // Future<ApiTest> getPostCard() async {
+  //   final url = Uri.parse(
+  //       'https://apis.data.go.kr/B551011/KorService1/searchFestival1?numOfRows=10&pageNo=1&MobileOS=AND&MobileApp=MobileApp&_type=json&eventStartDate=20230410&serviceKey=jMXX6HpoTlWX73RSA8DY2Bcz6nQfa1wI34sfnXo0JSjZW%2FqC1C%2B1%2FmoHMaEsN5IQagpIoVRHDQdDhyy3cB1qkQ%3D%3D');
+  //   // var response = await http.get(url);
+  //   var response = await http.get(url);
+  //   var number = widget.number;
+  //   var data = ApiTest.fromJson(jsonDecode(response.body), number);
+  //   print("data1: ${data.name}");
+  //   return data;
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -116,11 +150,28 @@ class _PostCardState extends State<PostCard> {
               Row(
                 children: [
                   Expanded(
-                    child: Text(
-                      '내용',
-                      style: TextStyle(fontSize: 20),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Text(
+                        '내용',
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ),
                   ),
+                  FutureBuilder(
+                      future: http.get(Uri.parse(apiUrl)),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          var data = jsonDecode(snapshot.data!.body);
+                          return Text(
+                            data['response']['body']['items']['item']
+                                    [widget.number.toInt()]['contentid']
+                                ['contentid'],
+                          );
+                        } else {
+                          return CircularProgressIndicator();
+                        }
+                      }),
                 ],
               ),
             ],
