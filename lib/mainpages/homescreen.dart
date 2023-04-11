@@ -11,7 +11,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Container(
         child: ListView.separated(
-      itemCount: 100,
+      itemCount: 10,
       itemBuilder: (BuildContext context, int index) {
         return PostCard(
           number: index,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:xml2json/xml2json.dart';
 
 class MyLikeScreen extends StatefulWidget {
   int number;
@@ -11,18 +12,22 @@ class MyLikeScreen extends StatefulWidget {
 
 class _MyLikeScreenState extends State<MyLikeScreen> {
   final String apiUrl =
-      'https://apis.data.go.kr/B551011/KorService1/searchFestival1?numOfRows=10&pageNo=1&MobileOS=AND&MobileApp=MobileApp&_type=json&eventStartDate=20230410&serviceKey=jMXX6HpoTlWX73RSA8DY2Bcz6nQfa1wI34sfnXo0JSjZW%2FqC1C%2B1%2FmoHMaEsN5IQagpIoVRHDQdDhyy3cB1qkQ%3D%3D';
-
+      'http://openapi.seoul.go.kr:8088/426562516e7768643130305972556f4d/xml/citydata/1/5/%EC%9E%A0%EC%8B%A4%ED%95%9C%EA%B0%95%EA%B3%B5%EC%9B%90';
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: http.get(Uri.parse(apiUrl)),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            var data = jsonDecode(snapshot.data!.body);
+            final getXmlData = snapshot.data!.body;
+            final xml = Xml2Json()..parse(getXmlData);
+            final jsonData = xml.toParker();
+            var data = jsonDecode(jsonData);
+            print("ddd ${data['SeoulRtd.citydata']}");
+            // var data = jsonDecode(snapshot.data);
             return Center(
-              child: Text(data['response']['body']['items']['item']
-                  [int.parse('1')]['contentid']),
+              child:
+                  Text("${data['SeoulRtd.citydata']['CITYDATA']['AREA_NM']}"),
             );
           } else {
             return Center(
