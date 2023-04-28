@@ -42,25 +42,55 @@ class _MyScreenState extends State<MyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var data = "잠실한강공원";
     return Column(children: [
       ElevatedButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AreaPage(data)));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AreaPage("잠실한강공원", '970460')));
         },
-        child: Text('${data}'),
+        child: Text("잠실한강공원"),
       ),
       ElevatedButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AreaPage('망원한강공원')));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      AreaPage('망원한강공원', '1059638'))); // 눌렀을때 데이터 전송
         },
         child: Text('망원한강공원'),
       ),
-      Text(
-        '${data}',
-        style: TextStyle(fontSize: 20),
+      ElevatedButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      AreaPage('이촌한강공원', '970636'))); // 눌렀을때 데이터 전송
+        },
+        child: Text('이촌한강공원'),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      AreaPage('반포한강공원', '2763875'))); // 눌렀을때 데이터 전송
+        },
+        child: Text('반포한강공원'),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      AreaPage('뚝섬한강공원', '1030763'))); // 눌렀을때 데이터 전송
+        },
+        child: Text('뚝섬한강공원'),
       ),
     ]);
   }
