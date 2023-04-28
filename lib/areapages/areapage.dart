@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:xml2json/xml2json.dart';
@@ -12,8 +13,15 @@ class AreaPage extends StatefulWidget {
   _AreaPageState createState() => _AreaPageState();
 }
 
+class Park {
+  String parkName;
+  String parkAddress;
+
+  Park(this.parkName, this.parkAddress);
+}
+
 class _AreaPageState extends State<AreaPage> {
-  void FlutterDialog(String text) {
+  void AreaOverview(String text) {
     showDialog(
         context: context,
         //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
@@ -51,15 +59,52 @@ class _AreaPageState extends State<AreaPage> {
         });
   }
 
-  var overview = '';
+  void ParkInfo(String text) {
+    showDialog(
+        context: context,
+        //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            //Dialog Main Title
+            title: Column(
+              children: <Widget>[
+                new Text("Overview"),
+              ],
+            ),
+            //
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "${text}",
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              new TextButton(
+                child: new Text("확인"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
+    var overview = '';
     final apiUrl1 =
         'http://openapi.seoul.go.kr:8088/426562516e7768643130305972556f4d/xml/citydata/1/5/' +
             '${widget.areaName}';
     final apiUrl2 =
-        'https://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=jMXX6HpoTlWX73RSA8DY2Bcz6nQfa1wI34sfnXo0JSjZW%2FqC1C%2B1%2FmoHMaEsN5IQagpIoVRHDQdDhyy3cB1qkQ%3D%3D&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=' +
+        'https://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=GY4ctA033jjd9iwNhcz3adE9fBXYGUYEDxLG9RMIE68Cg3jCD2hRgxgblKO9TBUSNcxK5NU6lPL%2BM3D3Grk23Q%3D%3D&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=' +
             '${widget.contentid}' +
             '&contentTypeId=12&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&numOfRows=10&pageNo=1'
                 '${widget.areaName}';
@@ -116,10 +161,17 @@ class _AreaPageState extends State<AreaPage> {
               }
             }),
         ElevatedButton(
-          onPressed: () => FlutterDialog(overview),
+          onPressed: () => AreaOverview(overview),
           child: Text(
             'Overview',
             style: TextStyle(fontSize: 30),
+          ),
+        ),
+        ElevatedButton(
+          onPressed: () => ParkInfo(overview),
+          child: Text(
+            '주차장 정보',
+            style: TextStyle(fontSize: 28),
           ),
         ),
       ]),
