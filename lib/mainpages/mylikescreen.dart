@@ -23,7 +23,6 @@ class _MyLikeScreenState extends State<MyLikeScreen> {
             final xml = Xml2Json()..parse(getXmlData);
             final jsonData = xml.toParker();
             var data = jsonDecode(jsonData);
-            print("ddd ${data['SeoulRtd.citydata']}");
             // var data = jsonDecode(snapshot.data);
             return Center(
               child:
