@@ -110,13 +110,26 @@ class _AreaPageState extends State<AreaPage> {
                 '${widget.areaName}';
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          '${widget.areaName}',
-          style: TextStyle(
-              fontFamily: 'EastSeaDokdo', fontSize: 40, color: Colors.black),
+        toolbarHeight: 70,
+        title: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            CircleAvatar(
+              backgroundColor: Color.fromARGB(255, 228, 222, 255),
+              radius: 25,
+            ),
+            Text(
+              '한강은 지금',
+              style: TextStyle(
+                  fontFamily: 'EastSeaDokdo',
+                  fontSize: 40,
+                  color: Colors.black),
+            ),
+          ],
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 249, 248, 253),
+        elevation: 0.0,
       ),
       body: Column(children: [
         FutureBuilder(
