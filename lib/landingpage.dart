@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hanriver_now/mainpage.dart';
+import 'package:hanriver_now/mainpages/mylikescreen.dart';
 
 class LandingPage extends StatefulWidget {
   @override
@@ -29,7 +30,6 @@ class _LandingPageState extends State<LandingPage> {
           height: MediaQuery.of(context).size.height,
           child: Image.asset('assets/images/splash.png', fit: BoxFit.cover),
         ),
-        CircularProgressIndicator(),
       ],
     ));
   }

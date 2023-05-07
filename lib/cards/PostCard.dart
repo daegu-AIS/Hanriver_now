@@ -32,7 +32,7 @@ class PostCard extends StatefulWidget {
 
 class _PostCardState extends State<PostCard> {
   final String apiUrl =
-      'https://apis.data.go.kr/B551011/KorService1/searchFestival1?numOfRows=10&pageNo=1&MobileOS=AND&MobileApp=MobileApp&_type=json&eventStartDate=20230410&serviceKey=jMXX6HpoTlWX73RSA8DY2Bcz6nQfa1wI34sfnXo0JSjZW%2FqC1C%2B1%2FmoHMaEsN5IQagpIoVRHDQdDhyy3cB1qkQ%3D%3D';
+      'https://apis.data.go.kr/B551011/KorService1/searchFestival1?numOfRows=10&pageNo=1&MobileOS=AND&MobileApp=MobileApp&_type=json&eventStartDate=20230410&serviceKey=GY4ctA033jjd9iwNhcz3adE9fBXYGUYEDxLG9RMIE68Cg3jCD2hRgxgblKO9TBUSNcxK5NU6lPL%2BM3D3Grk23Q%3D%3D';
 
   @override
   Widget build(BuildContext context) {

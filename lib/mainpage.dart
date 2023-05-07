@@ -13,42 +13,60 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   List<BottomNavigationBarItem> bottomItems = [
-    BottomNavigationBarItem(
-      label: '홈',
-      icon: Icon(Icons.home_filled),
-    ),
-    BottomNavigationBarItem(
-      label: '모아보기',
-      icon: Icon(Icons.grid_view),
-    ),
+    // BottomNavigationBarItem(
+    //   label: '홈',
+    //   icon: Icon(Icons.home_filled),
+    // ),
     BottomNavigationBarItem(
       label: '좋아요',
       icon: Icon(Icons.favorite),
     ),
+    BottomNavigationBarItem(
+        label: '모아보기',
+        backgroundColor: Color.fromARGB(200, 168, 147, 255),
+        icon: Icon(
+          Icons.home_outlined,
+          size: 30,
+        )),
     BottomNavigationBarItem(
       label: '마이페이지',
       icon: Icon(Icons.person),
     ),
   ];
   List pages = [
-    HomeScreen(),
-    MyLikeScreen(),
+    // HomeScreen(),
     MyScreen(),
+    MyLikeScreen(),
     ShowGridScreen(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          '한강은 지금',
-          style: TextStyle(
-              fontFamily: 'EastSeaDokdo', fontSize: 40, color: Colors.black),
+        toolbarHeight: 70,
+        title: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            CircleAvatar(
+              backgroundColor: Color.fromARGB(255, 228, 222, 255),
+              radius: 25,
+            ),
+            Text(
+              '한강은 지금',
+              style: TextStyle(
+                  fontFamily: 'EastSeaDokdo',
+                  fontSize: 40,
+                  color: Colors.black),
+            ),
+          ],
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 249, 248, 253),
+        elevation: 0.0,
       ),
+
       bottomNavigationBar: BottomNavigationBar(
+        iconSize: 20,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
         selectedItemColor: Colors.black,
@@ -66,6 +84,25 @@ class _MainPageState extends State<MainPage> {
         items: bottomItems,
       ),
       body: pages[_selectedIndex],
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     // FAB를 눌렀을 때 수행할 동작
+      //   },
+      //   child: Icon(Icons.home_outlined),
+      //   backgroundColor: Color.fromARGB(200, 168, 147, 255),
+      //   foregroundColor: Colors.white,
+      //   heroTag: 'Inset FAB',
+      //   hoverColor: Colors.purpleAccent,
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.home_outlined),
+      //   onPressed: () {},
+      //   backgroundColor: Color.fromARGB(200, 168, 147, 255),
+      // ),
+      // floatingActionButtonLocation:
+      //     FloatingActionButtonLocation.miniCenterDocked,
     );
   }
 }

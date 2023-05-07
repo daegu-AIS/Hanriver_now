@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'EastSeaDokdo',
       ),
-      home: MainPage(),
+      home: LandingPage(),
     );
   }
 }
