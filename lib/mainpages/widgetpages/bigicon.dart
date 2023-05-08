@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hanriver_now/mainpages/mylikescreen.dart';
 import 'package:hanriver_now/areapages/areapage.dart';
 import 'package:hanriver_now/areapages/overview.dart';
+import 'package:hanriver_now/areapages/gwangnaru.dart';
 
 class BigWidget extends StatefulWidget {
   AreaInfo areaInfo;
@@ -189,8 +190,8 @@ class _BigWidget extends State<BigWidget> {
           InkWell(
             splashColor: Color.fromARGB(255, 156, 137, 77),
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => OverView()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => GwangNaRu()));
             },
             child: Container(
               alignment: Alignment.centerRight,
