@@ -1,13 +1,10 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:hanriver_now/mainpages/mylikescreen.dart';
 
 class SmallWidget extends StatefulWidget {
-  final String smallImage;
-  final double smailmargin;
-  final String areaName;
-
-  const SmallWidget(this.smallImage, this.smailmargin, this.areaName);
+  AreaInfo areaInfo;
+  double smailmargin;
+  SmallWidget(this.areaInfo, this.smailmargin);
 
   @override
   _SmallWidget createState() => _SmallWidget();
@@ -19,13 +16,13 @@ class _SmallWidget extends State<SmallWidget> {
     final appheight = MediaQuery.of(context).size.height;
     final appwidth = MediaQuery.of(context).size.width;
     return Container(
-      height: 80,
-      width: 80,
+      height: appwidth * 0.14,
+      width: appwidth * 0.14,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         image: DecorationImage(
           image: NetworkImage(
-            widget.smallImage,
+            widget.areaInfo.nightview,
           ),
           fit: BoxFit.fitHeight,
         ),
@@ -35,8 +32,9 @@ class _SmallWidget extends State<SmallWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            widget.areaName,
-            style: TextStyle(color: Colors.red, fontSize: 30),
+            widget.areaInfo.areaName,
+            style:
+                TextStyle(color: Colors.white, fontSize: appwidth * 0.14 * 0.5),
             textAlign: TextAlign.center,
           ),
         ],
