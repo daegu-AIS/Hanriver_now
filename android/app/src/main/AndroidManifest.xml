@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hanriver_now">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="한강은 지금"
         android:name="${applicationName}"

@@ -18,10 +18,6 @@ class _MainPageState extends State<MainPage> {
     //   icon: Icon(Icons.home_filled),
     // ),
     BottomNavigationBarItem(
-      label: '좋아요',
-      icon: Icon(Icons.favorite),
-    ),
-    BottomNavigationBarItem(
         label: '모아보기',
         backgroundColor: Color.fromARGB(200, 168, 147, 255),
         icon: Icon(
@@ -29,19 +25,24 @@ class _MainPageState extends State<MainPage> {
           size: 30,
         )),
     BottomNavigationBarItem(
+      label: '좋아요',
+      icon: Icon(Icons.favorite),
+    ),
+    BottomNavigationBarItem(
       label: '마이페이지',
       icon: Icon(Icons.person),
     ),
   ];
   List pages = [
     // HomeScreen(),
-    MyScreen(),
     MyLikeScreen(),
+    MyScreen(),
     ShowGridScreen(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 249, 248, 253),
       appBar: AppBar(
         toolbarHeight: 70,
         title: Stack(
