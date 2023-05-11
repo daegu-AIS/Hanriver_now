@@ -59,15 +59,15 @@ class _GwangNaRu extends State<GwangNaRu> {
                         controller: controller,
                         children: [
                           Image.asset(
-                            "assets/images/뚝섬한강공원.jpg",
+                            "assets/images/뚝섬한강공원.webp",
                             fit: BoxFit.cover,
                           ),
                           Image.asset(
-                            "assets/images/여의도한강공원야경.jpg",
+                            "assets/images/여의도한강공원야경.webp",
                             fit: BoxFit.cover,
                           ),
                           Image.asset(
-                            "assets/images/난지한강공원야경.jpg",
+                            "assets/images/난지한강공원야경.webp",
                             fit: BoxFit.cover,
                           ),
                         ],

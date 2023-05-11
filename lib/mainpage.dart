@@ -37,7 +37,7 @@ class _MainPageState extends State<MainPage> {
     // HomeScreen(),
     MyLikeScreen(),
     MyScreen(),
-    ShowGridScreen(),
+    HomeScreen(),
   ];
   @override
   Widget build(BuildContext context) {

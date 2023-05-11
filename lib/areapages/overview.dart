@@ -3,9 +3,9 @@ import 'package:hanriver_now/areapages/overview.dart';
 import 'package:hanriver_now/mainpages/mylikescreen.dart';
 
 class OverView extends StatefulWidget {
-  // AreaInfo areaInfo;
+  AreaInfo areaInfo;
 
-  // OverView(this.areaInfo);
+  OverView(this.areaInfo);
 
   @override
   _OverView createState() => _OverView();
@@ -59,15 +59,11 @@ class _OverView extends State<OverView> {
                         controller: controller,
                         children: [
                           Image.asset(
-                            "assets/images/뚝섬한강공원.jpg",
+                            "assets/images/${widget.areaInfo.areaName}한강공원.webp",
                             fit: BoxFit.cover,
                           ),
                           Image.asset(
-                            "assets/images/여의도한강공원야경.jpg",
-                            fit: BoxFit.cover,
-                          ),
-                          Image.asset(
-                            "assets/images/난지한강공원야경.jpg",
+                            "assets/images/${widget.areaInfo.areaName}한강공원야경.webp",
                             fit: BoxFit.cover,
                           ),
                         ],
@@ -100,7 +96,7 @@ class _OverView extends State<OverView> {
                         Container(
                           padding: EdgeInsets.only(left: 20, top: 10),
                           child: Text(
-                            "광나루 한강 공원",
+                            "${widget.areaInfo.areaName} 한강 공원",
                             style: TextStyle(
                                 fontSize: 40,
                                 color: Color.fromARGB(255, 168, 147, 255)),
