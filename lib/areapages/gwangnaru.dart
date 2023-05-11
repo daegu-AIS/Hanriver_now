@@ -1,17 +1,28 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hanriver_now/areapages/overview.dart';
 import 'package:hanriver_now/mainpages/mylikescreen.dart';
 
 class GwangNaRu extends StatefulWidget {
-  // AreaInfo areaInfo;
+  AreaInfo areaInfo;
 
-  // OverView(this.areaInfo);
+  GwangNaRu(this.areaInfo);
 
   @override
   _GwangNaRu createState() => _GwangNaRu();
 }
 
 class _GwangNaRu extends State<GwangNaRu> {
+  // 이거 고정
+  Future<dynamic> readJson() async {
+    final String response =
+        await rootBundle.loadString('assets/json/ditail.json');
+    final data = await json.decode(response);
+    return data[0];
+  }
+
   final PageController controller =
       PageController(initialPage: 0, viewportFraction: 1);
   @override
@@ -98,14 +109,26 @@ class _GwangNaRu extends State<GwangNaRu> {
                       alignment: Alignment.topLeft,
                       child: Column(children: [
                         Container(
-                          padding: EdgeInsets.only(left: 20, top: 10),
-                          child: Text(
-                            "광나루 한강 공원",
-                            style: TextStyle(
-                                fontSize: 40,
-                                color: Color.fromARGB(255, 168, 147, 255)),
-                          ),
-                        )
+                            padding: EdgeInsets.only(left: 20, top: 10),
+                            child: FutureBuilder(
+                              // 여기서부터 시작
+                              future: readJson(), // 고정
+                              builder: (context, snapshot) {
+                                //고정
+                                if (snapshot.hasData) {
+                                  // 고정
+                                  return Text(
+                                    "${snapshot.data[widget.areaInfo.contentid]["name"]}",
+                                    style: TextStyle(
+                                        fontSize: 40,
+                                        color:
+                                            Color.fromARGB(255, 168, 147, 255)),
+                                  );
+                                } else {
+                                  return Text("없음");
+                                }
+                              },
+                            ))
                       ]),
                     ),
                   ),

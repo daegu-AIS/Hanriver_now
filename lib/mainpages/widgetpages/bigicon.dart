@@ -91,7 +91,7 @@ class _BigWidget extends State<BigWidget> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => OverView(widget.areaInfo)));
+                            builder: (context) => GwangNaRu(widget.areaInfo)));
                   },
                   child: Container(
                     decoration: BoxDecoration(
