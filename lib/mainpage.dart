@@ -48,16 +48,20 @@ class _MainPageState extends State<MainPage> {
         title: Stack(
           alignment: Alignment.center,
           children: <Widget>[
-            CircleAvatar(
-              backgroundColor: Color.fromARGB(255, 228, 222, 255),
-              radius: 25,
+            Image.asset(
+              'assets/images/title_icon.png',
+              fit: BoxFit.cover,
+              height: 50,
             ),
-            Text(
-              '한강은 지금',
-              style: TextStyle(
-                  fontFamily: 'EastSeaDokdo',
-                  fontSize: 40,
-                  color: Colors.black),
+            Container(
+              padding: EdgeInsets.only(top: 10),
+              child: Text(
+                '한강은 지금',
+                style: TextStyle(
+                    fontFamily: 'EastSeaDokdo',
+                    fontSize: 40,
+                    color: Colors.black),
+              ),
             ),
           ],
         ),

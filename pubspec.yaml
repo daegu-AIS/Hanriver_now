@@ -58,7 +58,7 @@ dev_dependencies:
 flutter_icons:
   android: "my_icon"
   ios : true
-  image_path: "assets/images/ais_icon.png"
+  image_path: "assets/images/icon.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

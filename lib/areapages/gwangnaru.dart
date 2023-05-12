@@ -36,22 +36,33 @@ class _GwangNaRu extends State<GwangNaRu> {
         title: Stack(
           alignment: Alignment.center,
           children: <Widget>[
-            CircleAvatar(
-              backgroundColor: Color.fromARGB(255, 228, 222, 255),
-              radius: 25,
+            Image.asset(
+              'assets/images/title_icon.png',
+              fit: BoxFit.cover,
+              height: 50,
             ),
-            Text(
-              '한강은 지금',
-              style: TextStyle(
-                  fontFamily: 'EastSeaDokdo',
-                  fontSize: 40,
-                  color: Colors.black),
+            Container(
+              padding: EdgeInsets.only(top: 10),
+              child: Text(
+                '한강은 지금',
+                style: TextStyle(
+                    fontFamily: 'EastSeaDokdo',
+                    fontSize: 40,
+                    color: Colors.black),
+              ),
             ),
           ],
         ),
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 249, 248, 253),
         elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: Colors.black,
+        ),
       ),
       body: ListView(
         children: [
@@ -70,15 +81,11 @@ class _GwangNaRu extends State<GwangNaRu> {
                         controller: controller,
                         children: [
                           Image.asset(
-                            "assets/images/뚝섬한강공원.webp",
+                            "assets/images/${widget.areaInfo.areaName}한강공원.webp",
                             fit: BoxFit.cover,
                           ),
                           Image.asset(
-                            "assets/images/여의도한강공원야경.webp",
-                            fit: BoxFit.cover,
-                          ),
-                          Image.asset(
-                            "assets/images/난지한강공원야경.webp",
+                            "assets/images/${widget.areaInfo.areaName}한강공원야경.webp",
                             fit: BoxFit.cover,
                           ),
                         ],
@@ -109,7 +116,8 @@ class _GwangNaRu extends State<GwangNaRu> {
                       alignment: Alignment.topLeft,
                       child: Column(children: [
                         Container(
-                            padding: EdgeInsets.only(left: 20, top: 10),
+                            padding:
+                                EdgeInsets.only(left: 20, top: 10, right: 50),
                             child: FutureBuilder(
                               // 여기서부터 시작
                               future: readJson(), // 고정

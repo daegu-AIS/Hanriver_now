@@ -14,7 +14,7 @@ class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
     Timer(Duration(seconds: 2), () {
-      Get.offAll(MainPage());
+      Get.offAll(MyLikeScreen());
     });
     super.initState();
   }
@@ -29,7 +29,7 @@ class _LandingPageState extends State<LandingPage> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Image.asset('assets/images/인트로_AdobeExpress.gif',
-              fit: BoxFit.cover),
+              fit: BoxFit.fitHeight),
         ),
       ],
     ));

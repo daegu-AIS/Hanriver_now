@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hanriver_now/areapages/gwangnaru.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:xml2json/xml2json.dart';
@@ -11,6 +12,9 @@ import 'package:hanriver_now/areapages/areapage.dart';
 import 'package:hanriver_now/mainpages/widgetpages/topwidget.dart';
 import 'package:hanriver_now/mainpages/widgetpages/bigicon.dart';
 import 'package:hanriver_now/areapages/overview.dart';
+import 'package:hanriver_now/mainpages/homescreen.dart';
+import 'package:hanriver_now/mainpages/showgridscreen.dart';
+import 'package:flutter/services.dart';
 
 class MyLikeScreen extends StatefulWidget {
   int number;
@@ -60,48 +64,178 @@ class _MyLikeScreenState extends State<MyLikeScreen> {
 
   @override
   build(BuildContext context) {
+    Future<bool> _onBackKey() async {
+      return await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('종료하시겠습니까?'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text(
+                    '예',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                    // Navigator.of(context).pop(true);
+                  },
+                ),
+                TextButton(
+                  child: Text(
+                    '아니오',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop(false);
+                  },
+                ),
+              ],
+            );
+          });
+    }
+
     final appheight = MediaQuery.of(context).size.height;
     final appwidth = MediaQuery.of(context).size.width;
-    print(dt);
-    return ListView(
-      children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return WillPopScope(
+      onWillPop: () {
+        return _onBackKey();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 70,
+          title: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              Image.asset(
+                'assets/images/title_icon.png',
+                fit: BoxFit.cover,
+                height: 50,
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 10),
+                child: Text(
+                  '한강은 지금',
+                  style: TextStyle(
+                      fontFamily: 'EastSeaDokdo',
+                      fontSize: 40,
+                      color: Colors.black),
+                ),
+              ),
+            ],
+          ),
+          centerTitle: true,
+          backgroundColor: Color.fromARGB(255, 249, 248, 253),
+          elevation: 0.0,
+        ),
+        body: Stack(
+          alignment: Alignment.bottomCenter,
           children: [
-            // 반가워요! 컨테이너
-            TopWidget(),
-            Row(
+            Column(
               children: [
-                Container(
-                  color: Color.fromARGB(255, 249, 248, 253),
-                  width: 25,
-                ),
-                Container(
-                  color: Color.fromARGB(255, 249, 248, 253),
-                  width: appwidth - 50,
-                  height: 100,
-                ),
-                Container(
-                  color: Color.fromARGB(255, 249, 248, 253),
-                  width: 25,
+                Expanded(
+                  child: ListView(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // 반가워요! 컨테이너
+                          TopWidget(),
+                          Row(
+                            children: [
+                              Container(
+                                color: Color.fromARGB(255, 249, 248, 253),
+                                width: 25,
+                              ),
+                              Container(
+                                color: Color.fromARGB(255, 249, 248, 253),
+                                width: appwidth - 50,
+                                height: 100,
+                              ),
+                              Container(
+                                color: Color.fromARGB(255, 249, 248, 253),
+                                width: 25,
+                              ),
+                            ],
+                          ),
+                          // 작은 아이콘 컨테이너
+                        ],
+                      ),
+                      BigWidget(gwangnaru),
+                      BigWidget(gangseo),
+                      BigWidget(jamsil),
+                      BigWidget(ttukseom),
+                      BigWidget(jamwon),
+                      BigWidget(ichon),
+                      BigWidget(banpo),
+                      BigWidget(mangwon),
+                      BigWidget(yeouido),
+                      BigWidget(nanji),
+                      BigWidget(yanghwa),
+                      SizedBox(height: 70),
+                    ],
+                  ),
                 ),
               ],
             ),
-            // 작은 아이콘 컨테이너
+            Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Container(
+                  height: 70,
+                  color: Colors.white,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.map),
+                        onPressed: () {
+                          Get.toNamed('/mylike');
+                        },
+                      ),
+                      SizedBox(
+                        width: appwidth / 4,
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.info_outline,
+                          size: 30,
+                        ),
+                        onPressed: () {
+                          Navigator.push(context, PageRouteBuilder(
+                            pageBuilder: (context, a, b) {
+                              return OverView(gwangnaru);
+                            },
+                          ));
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CircleAvatar(
+                        radius: 40,
+                        backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+                        child: CircleAvatar(
+                            backgroundColor: Color.fromRGBO(168, 147, 255, 0.6),
+                            radius: 35,
+                            child: Icon(
+                              Icons.home,
+                              size: 30,
+                              color: Colors.black,
+                            ))),
+                    Container(
+                      height: 10,
+                    )
+                  ],
+                ),
+              ],
+            ),
           ],
         ),
-        BigWidget(gwangnaru),
-        BigWidget(gangseo),
-        BigWidget(jamsil),
-        BigWidget(ttukseom),
-        BigWidget(jamwon),
-        BigWidget(ichon),
-        BigWidget(banpo),
-        BigWidget(mangwon),
-        BigWidget(yeouido),
-        BigWidget(nanji),
-        BigWidget(yanghwa),
-      ],
+      ),
     );
   }
 }
