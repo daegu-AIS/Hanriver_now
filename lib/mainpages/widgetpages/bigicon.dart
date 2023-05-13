@@ -96,12 +96,12 @@ class _BigWidget extends State<BigWidget> {
                     fit: BoxFit.fill,
                   ),
                 ),
-                height: appheight * 0.27,
+                height: appheight * 0.24,
                 width: appwidth * 0.64,
                 alignment: Alignment.center,
               ),
               Positioned(
-                top: (appheight * 0.21 - appheight * 0.14) / 2,
+                top: (appheight * 0.04) / 2,
                 left: appwidth - (appwidth * 0.41) - appwidth * 0.22,
                 child: InkWell(
                   splashColor: Color.fromARGB(255, 156, 137, 77),

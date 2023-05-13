@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hanriver_now/areapages/overview.dart';
 import 'package:hanriver_now/mainpages/mylikescreen.dart';
+import 'package:http/http.dart' as http;
 
 class GwangNaRu extends StatefulWidget {
   AreaInfo areaInfo;
@@ -23,6 +24,7 @@ class _GwangNaRu extends State<GwangNaRu> {
     return data[0];
   }
 
+  var overview = "";
   final PageController controller =
       PageController(initialPage: 0, viewportFraction: 1);
   @override
@@ -33,7 +35,7 @@ class _GwangNaRu extends State<GwangNaRu> {
     return FutureBuilder(
       future: readJson(),
       builder: (context, snapshot) {
-        void ParkInfo(String text) {
+        void ParkInfo() {
           showDialog(
               context: context,
               //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
@@ -101,6 +103,65 @@ class _GwangNaRu extends State<GwangNaRu> {
                           ],
                         ),
                         Text("출처 : 한강 사업본부 통합주차포털 ")
+                      ]),
+                    ),
+                  ),
+
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text(
+                        "확인",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                );
+              });
+        }
+
+        void Overview(String overview) {
+          showDialog(
+              context: context,
+              //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0)),
+                  //Dialog Main Title
+                  title: Column(
+                    children: <Widget>[
+                      Text(
+                        "상세정보",
+                        style: TextStyle(fontSize: 40),
+                      ),
+                    ],
+                  ),
+                  //
+                  content: Container(
+                    constraints: BoxConstraints(
+                        maxHeight: appheight * 0.3,
+                        maxWidth: appwidth * 0.8,
+                        minWidth: appwidth * 0.8),
+                    child: SingleChildScrollView(
+                      child: ListBody(children: [
+                        Column(
+                          // mainAxisSize: MainAxisSize.values[1],
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                padding: EdgeInsets.only(bottom: 20),
+                                child: Text(
+                                  overview,
+                                  style: TextStyle(fontSize: 20),
+                                ))
+                          ],
+                        ),
+                        Text("출처 : 한국관광공사(공공데이터포털) ")
                       ]),
                     ),
                   ),
@@ -203,29 +264,143 @@ class _GwangNaRu extends State<GwangNaRu> {
                         ),
                         height: appheight * 0.25,
                         alignment: Alignment.topLeft,
-                        child: Column(children: [
-                          Container(
-                            alignment: Alignment.topLeft,
-                            padding:
-                                EdgeInsets.only(left: 20, top: 10, right: 50),
-                            child: Text(
-                              "${widget.areaInfo.areaName} 한강공원",
-                              style: TextStyle(
-                                  fontSize: 40,
-                                  color: Color.fromARGB(255, 168, 147, 255)),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 200,
-                            child: ElevatedButton(
-                              onPressed: () => ParkInfo("overview"),
-                              child: Text(
-                                '주차 정보',
-                                style: TextStyle(fontSize: 28),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                alignment: Alignment.topLeft,
+                                padding: EdgeInsets.only(
+                                    left: 20, top: 10, right: 50),
+                                child: Text(
+                                  "대한민국",
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.black),
+                                ),
                               ),
-                            ),
-                          ),
-                        ]),
+                              Container(
+                                alignment: Alignment.topLeft,
+                                padding: EdgeInsets.only(left: 20, right: 50),
+                                child: Text(
+                                  "${widget.areaInfo.areaName} 한강공원",
+                                  style: TextStyle(
+                                      fontSize: 40,
+                                      color:
+                                          Color.fromARGB(255, 168, 147, 255)),
+                                ),
+                              ),
+                              Container(
+                                // color: Colors.blue,
+                                height: appheight * 0.14,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                        padding:
+                                            EdgeInsets.only(left: 20, right: 5),
+                                        width: appwidth * 0.6,
+                                        height: appheight * 0.14,
+                                        // color: Colors.amber,
+                                        child: FutureBuilder(
+                                          future: http.get(Uri.parse(
+                                              "https://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=GY4ctA033jjd9iwNhcz3adE9fBXYGUYEDxLG9RMIE68Cg3jCD2hRgxgblKO9TBUSNcxK5NU6lPL%2BM3D3Grk23Q%3D%3D&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=${contentid}&contentTypeId=12&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&numOfRows=10&pageNo=1")),
+                                          builder: (context, snapshot) {
+                                            if (snapshot.hasData) {
+                                              var getXmlData =
+                                                  snapshot.data!.body;
+                                              var data = jsonDecode(utf8.decode(
+                                                  getXmlData.runes.toList()));
+                                              overview = data['response']
+                                                      ['body']['items']['item']
+                                                  [0]['overview'];
+                                              overview = overview.replaceAll(
+                                                  RegExp(
+                                                      '[^ac-qs-zA-Z0-9가-힣.\\sぁ-ゔァ-ヴー々〆〤一-龥]'),
+                                                  "");
+                                              return Column(children: [
+                                                Flexible(
+                                                    child: RichText(
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 4,
+                                                  text: TextSpan(
+                                                    text: overview,
+                                                    style: TextStyle(
+                                                        fontSize:
+                                                            appwidth * 0.05,
+                                                        fontFamily:
+                                                            'EastSeaDokdo',
+                                                        color: Colors.black),
+                                                  ),
+                                                )),
+                                              ]);
+                                            } else {
+                                              return Center();
+                                            }
+                                          },
+                                        )),
+                                    Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.only(
+                                                right: 20, top: 10),
+                                            width: appwidth * 0.3,
+                                            child: ElevatedButton(
+                                              style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all<
+                                                              Color>(
+                                                          Color.fromARGB(255,
+                                                              211, 200, 255)),
+                                                  shape: MaterialStateProperty
+                                                      .all<RoundedRectangleBorder>(
+                                                          RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15.0),
+                                                  ))),
+                                              onPressed: () => ParkInfo(),
+                                              child: Text(
+                                                '주차 정보',
+                                                style: TextStyle(
+                                                    fontSize: 28,
+                                                    color: Colors.black),
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.only(right: 20),
+                                            width: appwidth * 0.3,
+                                            child: ElevatedButton(
+                                              style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all<
+                                                              Color>(
+                                                          Color.fromARGB(255,
+                                                              211, 200, 255)),
+                                                  shape: MaterialStateProperty
+                                                      .all<RoundedRectangleBorder>(
+                                                          RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15.0),
+                                                  ))),
+                                              onPressed: () =>
+                                                  Overview(overview),
+                                              child: Text(
+                                                '상세 정보',
+                                                style: TextStyle(
+                                                    fontSize: 28,
+                                                    color: Colors.black),
+                                              ),
+                                            ),
+                                          ),
+                                        ]),
+                                  ],
+                                ),
+                              ),
+                            ]),
                       ),
                     ),
                     SizedBox(
