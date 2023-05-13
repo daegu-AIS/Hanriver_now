@@ -288,10 +288,10 @@ class _OverView extends State<OverView> {
                       IconButton(
                         icon: Icon(Icons.map),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MyLikeScreen()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => MyLikeScreen()));
                         },
                       ),
                       SizedBox(
@@ -303,10 +303,10 @@ class _OverView extends State<OverView> {
                           size: 30,
                         ),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MyLikeScreen()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => MyLikeScreen()));
                         },
                       ),
                     ],

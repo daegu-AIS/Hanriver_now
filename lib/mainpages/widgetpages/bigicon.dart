@@ -67,7 +67,7 @@ class _BigWidget extends State<BigWidget> {
   Widget build(BuildContext context) {
     Future<dynamic> readJson() async {
       final String response =
-          await rootBundle.loadString('assets/json/ditail.json');
+          await rootBundle.loadString('assets/json/detail.json');
       final data = await json.decode(response);
       return data[0];
     }
@@ -147,34 +147,15 @@ class _BigWidget extends State<BigWidget> {
                                     padding: EdgeInsets.only(
                                         left: appwidth * 0.05,
                                         top: appheight * 0.002),
-                                    width: appwidth * 0.45 * 0.8,
+                                    width: appwidth * 0.45,
                                     height: appheight * 0.158 * 0.3,
                                     // color: Colors.red,
                                     child: Text(
                                       "${widget.areaInfo.areaName} 한강 공원",
                                       style: TextStyle(
-                                          fontSize: appwidth * 0.45 * 0.14),
+                                          fontSize: appwidth * 0.45 * 0.16),
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: appwidth * 0.45 * 0.1,
-                                    height: appheight * 0.158 * 0.3,
-                                  ),
-                                  // SizedBox(
-                                  //   width: appwidth * 0.45 * 0.14,
-                                  //   height: appwidth * 0.45 * 0.14,
-                                  //   // color: Colors.red,
-                                  //   child: CircleAvatar(
-                                  //     backgroundColor:
-                                  //         Color.fromARGB(255, 241, 237, 255),
-                                  //     child: Icon(
-                                  //       Icons.favorite,
-                                  //       size: appwidth * 0.45 * 0.14 * 0.7,
-                                  //       color:
-                                  //           Color.fromARGB(255, 211, 200, 255),
-                                  //     ),
-                                  //   ),
-                                  // ),
                                 ],
                               ),
                             ],

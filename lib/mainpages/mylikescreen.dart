@@ -190,7 +190,7 @@ class _MyLikeScreenState extends State<MyLikeScreen> {
                       IconButton(
                         icon: Icon(Icons.map),
                         onPressed: () {
-                          Get.toNamed('/mylike');
+                          // Get.toNamed('/mylike');
                         },
                       ),
                       SizedBox(
