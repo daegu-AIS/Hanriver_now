@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:hanriver_now/areapages/overview.dart';
 import 'package:hanriver_now/mainpages/mylikescreen.dart';
 import 'package:http/http.dart' as http;
+import 'package:html/parser.dart' as parser;
+import 'package:html/dom.dart' as dom;
 
 class GwangNaRu extends StatefulWidget {
   AreaInfo areaInfo;
@@ -35,12 +37,34 @@ class _GwangNaRu extends State<GwangNaRu> {
     return FutureBuilder(
       future: readJson(),
       builder: (context, snapshot) {
-        void ParkInfo() {
+        Future<dynamic> fetchData(int count) async {
+          var url = Uri.parse(
+              "https://www.ihangangpark.kr/parking/region/region" +
+                  widget.areaInfo.number.toString());
+          var response = await http.get(url);
+
+          if (response.statusCode == 200) {
+            // print(response.body);
+            var document = parser.parse(response.body);
+            var titleElement = document.querySelectorAll('tbody > tr > td');
+            // for (var i = 0; i < 3; i++) {
+            //   print(titleElement[i * 6 + 3].text.replaceAll(RegExp('\\s'), ""));
+            //   print(titleElement[i * 6 + 4].text.replaceAll(RegExp('\\s'), ""));
+            // }
+            return titleElement;
+          } else {
+            print("error");
+            return [];
+          }
+        }
+
+        void ParkInfo() async {
           showDialog(
               context: context,
               //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
               barrierDismissible: false,
               builder: (BuildContext context) {
+                fetchData(snapshot.data[contentid]["infotext2"].length);
                 return AlertDialog(
                   // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
                   shape: RoundedRectangleBorder(
@@ -55,6 +79,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                     ],
                   ),
                   //
+
                   content: Container(
                     constraints: BoxConstraints(
                         maxHeight: appheight * 0.3,
@@ -66,40 +91,60 @@ class _GwangNaRu extends State<GwangNaRu> {
                           // mainAxisSize: MainAxisSize.values[1],
                           // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            for (num i = 0;
+                            for (int i = 0;
                                 i <
                                     snapshot
                                         .data[contentid]["infotext2"].length;
                                 i++)
-                              Column(
-                                children: [
-                                  Container(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      snapshot.data[contentid]["infotext2"][i]
-                                          ["name"],
-                                      style: TextStyle(fontSize: 30),
-                                    ),
-                                  ),
-                                  Container(
-                                    alignment: Alignment.centerLeft,
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Text(
-                                      "주소 : ${snapshot.data[contentid]["infotext2"][i]["addr"]}",
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                  ),
-                                  Container(
-                                    alignment: Alignment.centerLeft,
-                                    padding:
-                                        EdgeInsets.only(left: 10, bottom: 20),
-                                    child: Text(
-                                      "요금 : ${snapshot.data[contentid]["infotext2"][i]["price"]}",
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                  ),
-                                ],
-                              )
+                              FutureBuilder(
+                                future: fetchData(i),
+                                builder: (context, snapshot2) {
+                                  var data1 = snapshot2.data;
+                                  var data2 = "";
+                                  var data3 = "";
+                                  if (snapshot2.hasData) {
+                                    data2 = data1[i * 6 + 3]
+                                        .text
+                                        .replaceAll(RegExp('\\s'), "");
+                                    data3 = data1[i * 6 + 4]
+                                        .text
+                                        .replaceAll(RegExp('\\s'), "");
+
+                                    return Column(
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(
+                                            "${snapshot.data[contentid]["infotext2"][i]["name"]}  $data2/$data3",
+                                            style: TextStyle(fontSize: 30),
+                                          ),
+                                        ),
+                                        Container(
+                                          alignment: Alignment.centerLeft,
+                                          padding: EdgeInsets.only(left: 10),
+                                          child: Text(
+                                            "주소 : ${snapshot.data[contentid]["infotext2"][i]["addr"]}",
+                                            style: TextStyle(fontSize: 20),
+                                          ),
+                                        ),
+                                        Container(
+                                          alignment: Alignment.centerLeft,
+                                          padding: EdgeInsets.only(
+                                              left: 10, bottom: 20),
+                                          child: Text(
+                                            "요금 : ${snapshot.data[contentid]["infotext2"][i]["price"]}",
+                                            style: TextStyle(fontSize: 20),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  } else {
+                                    return Container(
+                                      height: appheight,
+                                    );
+                                  }
+                                },
+                              ),
                           ],
                         ),
                         Text("출처 : 한강 사업본부 통합주차포털 ")
@@ -181,395 +226,433 @@ class _GwangNaRu extends State<GwangNaRu> {
               });
         }
 
-        return Scaffold(
-          backgroundColor: Color.fromARGB(255, 249, 248, 253),
-          appBar: AppBar(
-            toolbarHeight: 70,
-            title: Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                Image.asset(
-                  'assets/images/title_icon.png',
-                  fit: BoxFit.cover,
-                  height: 50,
-                ),
-                Container(
-                  padding: EdgeInsets.only(top: 10),
-                  child: Text(
-                    '한강은 지금',
-                    style: TextStyle(
-                        fontFamily: 'EastSeaDokdo',
-                        fontSize: 40,
-                        color: Colors.black),
-                  ),
-                ),
-              ],
-            ),
-            centerTitle: true,
+        if (snapshot.hasData) {
+          return Scaffold(
             backgroundColor: Color.fromARGB(255, 249, 248, 253),
-            elevation: 0.0,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              color: Colors.black,
+            appBar: AppBar(
+              toolbarHeight: 70,
+              title: Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  Image.asset(
+                    'assets/images/title_icon.png',
+                    fit: BoxFit.cover,
+                    height: 50,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Text(
+                      '한강은 지금',
+                      style: TextStyle(
+                          fontFamily: 'EastSeaDokdo',
+                          fontSize: 40,
+                          color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+              centerTitle: true,
+              backgroundColor: Color.fromARGB(255, 249, 248, 253),
+              elevation: 0.0,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios_new),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                color: Colors.black,
+              ),
             ),
-          ),
-          body: ListView(
-            children: [
-              SizedBox(
-                width: appwidth,
-                height: appheight * 0.5,
-                child: Stack(
-                  children: [
-                    Column(
-                      children: [
-                        SizedBox(
-                          width: appwidth,
-                          height: appheight * 0.3,
-                          child: PageView(
-                            scrollDirection: Axis.horizontal,
-                            controller: controller,
-                            children: [
-                              Image.asset(
-                                "assets/images/${widget.areaInfo.areaName}한강공원.webp",
-                                fit: BoxFit.cover,
-                              ),
-                              Image.asset(
-                                "assets/images/${widget.areaInfo.areaName}한강공원야경.webp",
-                                fit: BoxFit.cover,
+            body: ListView(
+              children: [
+                SizedBox(
+                  width: appwidth,
+                  height: appheight * 0.5,
+                  child: Stack(
+                    children: [
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: appwidth,
+                            height: appheight * 0.3,
+                            child: PageView(
+                              scrollDirection: Axis.horizontal,
+                              controller: controller,
+                              children: [
+                                Image.asset(
+                                  "assets/images/${widget.areaInfo.areaName}한강공원.webp",
+                                  fit: BoxFit.cover,
+                                ),
+                                Image.asset(
+                                  "assets/images/${widget.areaInfo.areaName}한강공원야경.webp",
+                                  fit: BoxFit.cover,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                        top: appheight * 0.23,
+                        left: appwidth * 0.05,
+                        width: appwidth * 0.9,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
                               ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                    Positioned(
-                      top: appheight * 0.23,
-                      left: appwidth * 0.05,
-                      width: appwidth * 0.9,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        height: appheight * 0.25,
-                        alignment: Alignment.topLeft,
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                alignment: Alignment.topLeft,
-                                padding: EdgeInsets.only(
-                                    left: 20, top: 10, right: 50),
-                                child: Text(
-                                  "대한민국",
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.black),
+                          height: appheight * 0.25,
+                          alignment: Alignment.topLeft,
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  padding: EdgeInsets.only(
+                                      left: 20, top: 10, right: 50),
+                                  child: Text(
+                                    "대한민국",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.black),
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                alignment: Alignment.topLeft,
-                                padding: EdgeInsets.only(left: 20, right: 50),
-                                child: Text(
-                                  "${widget.areaInfo.areaName} 한강공원",
-                                  style: TextStyle(
-                                      fontSize: 40,
-                                      color:
-                                          Color.fromARGB(255, 168, 147, 255)),
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  padding: EdgeInsets.only(left: 20, right: 50),
+                                  child: Text(
+                                    "${widget.areaInfo.areaName} 한강공원",
+                                    style: TextStyle(
+                                        fontSize: 40,
+                                        color:
+                                            Color.fromARGB(255, 168, 147, 255)),
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                // color: Colors.blue,
-                                height: appheight * 0.14,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                        padding:
-                                            EdgeInsets.only(left: 20, right: 5),
-                                        width: appwidth * 0.6,
-                                        height: appheight * 0.14,
-                                        // color: Colors.amber,
-                                        child: FutureBuilder(
-                                          future: http.get(Uri.parse(
-                                              "https://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=GY4ctA033jjd9iwNhcz3adE9fBXYGUYEDxLG9RMIE68Cg3jCD2hRgxgblKO9TBUSNcxK5NU6lPL%2BM3D3Grk23Q%3D%3D&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=${contentid}&contentTypeId=12&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&numOfRows=10&pageNo=1")),
-                                          builder: (context, snapshot) {
-                                            if (snapshot.hasData) {
-                                              var getXmlData =
-                                                  snapshot.data!.body;
-                                              var data = jsonDecode(utf8.decode(
-                                                  getXmlData.runes.toList()));
-                                              overview = data['response']
-                                                      ['body']['items']['item']
-                                                  [0]['overview'];
-                                              overview = overview.replaceAll(
-                                                  RegExp(
-                                                      '[^ac-qs-zA-Z0-9가-힣.\\sぁ-ゔァ-ヴー々〆〤一-龥]'),
-                                                  "");
-                                              return Column(children: [
-                                                Flexible(
-                                                    child: RichText(
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  maxLines: 4,
-                                                  text: TextSpan(
-                                                    text: overview,
-                                                    style: TextStyle(
-                                                        fontSize:
-                                                            appwidth * 0.05,
-                                                        fontFamily:
-                                                            'EastSeaDokdo',
-                                                        color: Colors.black),
-                                                  ),
-                                                )),
-                                              ]);
-                                            } else {
-                                              return Center();
-                                            }
-                                          },
-                                        )),
-                                    Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.only(
-                                                right: 20, top: 10),
-                                            width: appwidth * 0.3,
-                                            child: ElevatedButton(
-                                              style: ButtonStyle(
-                                                  backgroundColor:
-                                                      MaterialStateProperty.all<
-                                                              Color>(
-                                                          Color.fromARGB(255,
-                                                              211, 200, 255)),
-                                                  shape: MaterialStateProperty
-                                                      .all<RoundedRectangleBorder>(
-                                                          RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15.0),
-                                                  ))),
-                                              onPressed: () => ParkInfo(),
-                                              child: Text(
-                                                '주차 정보',
-                                                style: TextStyle(
-                                                    fontSize: 28,
-                                                    color: Colors.black),
+                                Container(
+                                  // color: Colors.blue,
+                                  height: appheight * 0.14,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(
+                                              left: 20, right: 5),
+                                          width: appwidth * 0.6,
+                                          height: appheight * 0.14,
+                                          // color: Colors.amber,
+                                          child: FutureBuilder(
+                                            future: http.get(Uri.parse(
+                                                "https://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=GY4ctA033jjd9iwNhcz3adE9fBXYGUYEDxLG9RMIE68Cg3jCD2hRgxgblKO9TBUSNcxK5NU6lPL%2BM3D3Grk23Q%3D%3D&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=${contentid}&contentTypeId=12&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&numOfRows=10&pageNo=1")),
+                                            builder: (context, snapshot) {
+                                              if (snapshot.hasData) {
+                                                var getXmlData =
+                                                    snapshot.data!.body;
+                                                var data = jsonDecode(
+                                                    utf8.decode(getXmlData.runes
+                                                        .toList()));
+                                                overview = data['response']
+                                                        ['body']['items']
+                                                    ['item'][0]['overview'];
+                                                overview = overview.replaceAll(
+                                                    RegExp(
+                                                        '[^ac-qs-zA-Z0-9가-힣.\\sぁ-ゔァ-ヴー々〆〤一-龥]'),
+                                                    "");
+                                                // print(appheight);
+                                                return Column(children: [
+                                                  Flexible(
+                                                      child: RichText(
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: appheight > 820
+                                                        ? 5
+                                                        : appheight > 700
+                                                            ? 4
+                                                            : 3,
+                                                    text: TextSpan(
+                                                      text: overview,
+                                                      style: TextStyle(
+                                                          fontSize:
+                                                              appwidth * 0.05,
+                                                          fontFamily:
+                                                              'EastSeaDokdo',
+                                                          color: Colors.black),
+                                                    ),
+                                                  )),
+                                                ]);
+                                              } else {
+                                                return Column(children: [
+                                                  Flexible(
+                                                      child: RichText(
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: appheight > 820
+                                                        ? 5
+                                                        : appheight > 700
+                                                            ? 4
+                                                            : 3,
+                                                    text: TextSpan(
+                                                      text: "Loading...",
+                                                      style: TextStyle(
+                                                          fontSize:
+                                                              appwidth * 0.05,
+                                                          fontFamily:
+                                                              'EastSeaDokdo',
+                                                          color: Colors.black),
+                                                    ),
+                                                  )),
+                                                ]);
+                                              }
+                                            },
+                                          )),
+                                      Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Container(
+                                              padding: EdgeInsets.only(
+                                                  right: 20, top: 10),
+                                              width: appwidth * 0.3,
+                                              child: ElevatedButton(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all<Color>(
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    211,
+                                                                    200,
+                                                                    255)),
+                                                    shape: MaterialStateProperty
+                                                        .all<RoundedRectangleBorder>(
+                                                            RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0),
+                                                    ))),
+                                                onPressed: () => ParkInfo(),
+                                                child: Text(
+                                                  '주차 정보',
+                                                  style: TextStyle(
+                                                      fontSize: appwidth * 0.06,
+                                                      color: Colors.black),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.only(right: 20),
-                                            width: appwidth * 0.3,
-                                            child: ElevatedButton(
-                                              style: ButtonStyle(
-                                                  backgroundColor:
-                                                      MaterialStateProperty.all<
-                                                              Color>(
-                                                          Color.fromARGB(255,
-                                                              211, 200, 255)),
-                                                  shape: MaterialStateProperty
-                                                      .all<RoundedRectangleBorder>(
-                                                          RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15.0),
-                                                  ))),
-                                              onPressed: () =>
-                                                  Overview(overview),
-                                              child: Text(
-                                                '상세 정보',
-                                                style: TextStyle(
-                                                    fontSize: 28,
-                                                    color: Colors.black),
+                                            Container(
+                                              padding:
+                                                  EdgeInsets.only(right: 20),
+                                              width: appwidth * 0.3,
+                                              child: ElevatedButton(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all<Color>(
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    211,
+                                                                    200,
+                                                                    255)),
+                                                    shape: MaterialStateProperty
+                                                        .all<RoundedRectangleBorder>(
+                                                            RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0),
+                                                    ))),
+                                                onPressed: () =>
+                                                    Overview(overview),
+                                                child: Text(
+                                                  '상세 정보',
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                          appwidth * 0.055,
+                                                      color: Colors.black),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ]),
-                                  ],
+                                          ]),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ]),
-                      ),
-                    ),
-                    SizedBox(
-                        width: appwidth,
-                        height: appheight * 0.3,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                            SizedBox(
-                              width: appwidth * 0.7,
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                          ],
-                        )),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 20, top: 15),
-                child: Text(
-                  "시설 현황",
-                  style: TextStyle(fontSize: appheight * 0.04),
-                ),
-              ),
-              Container(
-                  padding: EdgeInsets.only(left: 40, top: 5, right: 40),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    alignment: Alignment.topLeft,
-                    child: Column(children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 20, top: 10),
-                        height: appheight * 0.08,
-                        child: Row(
-                          children: [
-                            Container(
-                              // color: Colors.red,
-                              alignment: Alignment.topCenter,
-                              child: Text(
-                                "운동시설 : ",
-                                style: TextStyle(fontSize: appwidth * 0.05),
-                              ),
-                            ),
-                            Container(
-                                width: appwidth * 0.6,
-                                alignment: Alignment.topLeft,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Flexible(
-                                        child: RichText(
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                      text: TextSpan(
-                                        text:
-                                            "${snapshot.data[widget.areaInfo.contentid]["infotext"]["gym"]}",
-                                        style: TextStyle(
-                                            fontSize: appwidth * 0.05,
-                                            fontFamily: 'EastSeaDokdo',
-                                            color: Colors.black),
-                                      ),
-                                    )),
-                                  ],
-                                )),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(left: 20, top: 10),
-                        height: appheight * 0.08,
-                        child: Row(
-                          children: [
-                            Container(
-                              // color: Colors.red,
-                              alignment: Alignment.topCenter,
-                              child: Text(
-                                "편의시설 : ",
-                                style: TextStyle(fontSize: appwidth * 0.05),
-                              ),
-                            ),
-                            Container(
-                                width: appwidth * 0.6,
-                                alignment: Alignment.topLeft,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Flexible(
-                                        child: RichText(
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                      text: TextSpan(
-                                        text:
-                                            "${snapshot.data[widget.areaInfo.contentid]["infotext"]["facilities"]}",
-                                        style: TextStyle(
-                                            fontSize: appwidth * 0.05,
-                                            fontFamily: 'EastSeaDokdo',
-                                            color: Colors.black),
-                                      ),
-                                    )),
-                                  ],
-                                )),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(left: 20, top: 10),
-                        height: appheight * 0.08,
-                        child: Row(
-                          children: [
-                            Container(
-                              // color: Colors.red,
-                              alignment: Alignment.topCenter,
-                              child: Text(
-                                "기타 : ",
-                                style: TextStyle(fontSize: appwidth * 0.05),
-                              ),
-                            ),
-                            Container(
-                                width: appwidth * 0.6,
-                                alignment: Alignment.topLeft,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Flexible(
-                                        child: RichText(
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                      text: TextSpan(
-                                        text:
-                                            "${snapshot.data[widget.areaInfo.contentid]["infotext"]["else"]}",
-                                        style: TextStyle(
-                                            fontSize: appwidth * 0.05,
-                                            fontFamily: 'EastSeaDokdo',
-                                            color: Colors.black),
-                                      ),
-                                    )),
-                                  ],
-                                )),
-                          ],
+                              ]),
                         ),
                       ),
                       SizedBox(
-                        height: 10,
-                      )
-                    ]),
-                  )),
-            ],
-          ),
-        );
+                          width: appwidth,
+                          height: appheight * 0.3,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                              SizedBox(
+                                width: appwidth * 0.7,
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                            ],
+                          )),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 20, top: 15),
+                  child: Text(
+                    "시설 현황",
+                    style: TextStyle(fontSize: appheight * 0.04),
+                  ),
+                ),
+                Container(
+                    padding: EdgeInsets.only(left: 40, top: 5, right: 40),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      alignment: Alignment.topLeft,
+                      child: Column(children: [
+                        Container(
+                          padding: EdgeInsets.only(left: 20, top: 10),
+                          height: appheight * 0.08,
+                          child: Row(
+                            children: [
+                              Container(
+                                // color: Colors.red,
+                                alignment: Alignment.topCenter,
+                                child: Text(
+                                  "운동시설 : ",
+                                  style: TextStyle(fontSize: appwidth * 0.05),
+                                ),
+                              ),
+                              Container(
+                                  width: appwidth * 0.5,
+                                  alignment: Alignment.topLeft,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Flexible(
+                                          child: RichText(
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        text: TextSpan(
+                                          text:
+                                              "${snapshot.data[widget.areaInfo.contentid]["infotext"]["gym"]}",
+                                          style: TextStyle(
+                                              fontSize: appwidth * 0.05,
+                                              fontFamily: 'EastSeaDokdo',
+                                              color: Colors.black),
+                                        ),
+                                      )),
+                                    ],
+                                  )),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 20, top: 10),
+                          height: appheight * 0.08,
+                          child: Row(
+                            children: [
+                              Container(
+                                // color: Colors.red,
+                                alignment: Alignment.topCenter,
+                                child: Text(
+                                  "편의시설 : ",
+                                  style: TextStyle(fontSize: appwidth * 0.05),
+                                ),
+                              ),
+                              Container(
+                                  width: appwidth * 0.5,
+                                  alignment: Alignment.topLeft,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Flexible(
+                                          child: RichText(
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        text: TextSpan(
+                                          text:
+                                              "${snapshot.data[widget.areaInfo.contentid]["infotext"]["facilities"]}",
+                                          style: TextStyle(
+                                              fontSize: appwidth * 0.05,
+                                              fontFamily: 'EastSeaDokdo',
+                                              color: Colors.black),
+                                        ),
+                                      )),
+                                    ],
+                                  )),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 20, top: 10),
+                          height: appheight * 0.08,
+                          child: Row(
+                            children: [
+                              Container(
+                                // color: Colors.red,
+                                alignment: Alignment.topCenter,
+                                child: Text(
+                                  "기타 : ",
+                                  style: TextStyle(fontSize: appwidth * 0.05),
+                                ),
+                              ),
+                              Container(
+                                  width: appwidth * 0.5,
+                                  alignment: Alignment.topLeft,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Flexible(
+                                          child: RichText(
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        text: TextSpan(
+                                          text:
+                                              "${snapshot.data[widget.areaInfo.contentid]["infotext"]["else"]}",
+                                          style: TextStyle(
+                                              fontSize: appwidth * 0.05,
+                                              fontFamily: 'EastSeaDokdo',
+                                              color: Colors.black),
+                                        ),
+                                      )),
+                                    ],
+                                  )),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        )
+                      ]),
+                    )),
+              ],
+            ),
+          );
+        } else {
+          return Center();
+        }
       },
     );
   }

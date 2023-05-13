@@ -27,23 +27,26 @@ class AreaInfo {
   String areaName;
   String contentid;
   String nightview;
+  String number;
 
-  AreaInfo(this.areaName, this.contentid, this.nightview);
+  AreaInfo(this.areaName, this.contentid, this.nightview, this.number);
 
   get areaId => null;
 }
 
-AreaInfo gwangnaru = AreaInfo("광나루", "250252", "assets/images/뚝섬한강공원.webp");
-AreaInfo gangseo = AreaInfo("강서", "2733968", "assets/images/뚝섬한강공원.webp");
-AreaInfo jamsil = AreaInfo("잠실", "970460", "assets/images/뚝섬한강공원.webp");
-AreaInfo ttukseom = AreaInfo("뚝섬", "1030763", "assets/images/뚝섬한강공원.webp");
-AreaInfo jamwon = AreaInfo("잠원", "970342", "assets/images/잠원한강공원야경.webp");
-AreaInfo ichon = AreaInfo("이촌", "970636", "assets/images/뚝섬한강공원.webp");
-AreaInfo banpo = AreaInfo("반포", "2763875", "assets/images/반포한강공원.webp");
-AreaInfo mangwon = AreaInfo("망원", "1059638", "assets/images/뚝섬한강공원.webp");
-AreaInfo yeouido = AreaInfo("여의도", "1059479", "assets/images/여의도한강공원야경.webp");
-AreaInfo nanji = AreaInfo("난지", "127859", "assets/images/난지한강공원야경.webp");
-AreaInfo yanghwa = AreaInfo("양화", "1059877", "assets/images/뚝섬한강공원.webp");
+AreaInfo gwangnaru =
+    AreaInfo("광나루", "250252", "assets/images/광나루한강공원.webp", "1");
+AreaInfo gangseo = AreaInfo("강서", "2733968", "assets/images/강서한강공원.webp", "10");
+AreaInfo jamsil = AreaInfo("잠실", "970460", "assets/images/잠실한강공원.webp", "2");
+AreaInfo ttukseom = AreaInfo("뚝섬", "1030763", "assets/images/뚝섬한강공원.webp", "3");
+AreaInfo jamwon = AreaInfo("잠원", "970342", "assets/images/잠원한강공원야경.webp", "4");
+AreaInfo ichon = AreaInfo("이촌", "970636", "assets/images/이촌한강공원.webp", "6");
+AreaInfo banpo = AreaInfo("반포", "2763875", "assets/images/반포한강공원.webp", "5");
+AreaInfo mangwon = AreaInfo("망원", "1059638", "assets/images/뚝섬한강공원.webp", "7");
+AreaInfo yeouido =
+    AreaInfo("여의도", "1059479", "assets/images/여의도한강공원야경.webp", "8");
+AreaInfo nanji = AreaInfo("난지", "127859", "assets/images/난지한강공원야경.webp", "9");
+AreaInfo yanghwa = AreaInfo("양화", "1059877", "assets/images/뚝섬한강공원.webp", "11");
 
 List AreaList = [
   gwangnaru,
