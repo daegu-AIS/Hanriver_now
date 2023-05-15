@@ -136,40 +136,30 @@ class SV extends StatelessWidget {
                           ),
                         ))),
               ),
-              Stack(
-                children: <Widget>[
-                  Container(
-                    color: Colors.red,
-                    width: 300,
-                    height: 300,
-                  ),
-                  Align(
+              Container(
+                color: Colors.red,
+                width: 500,
+                height: 300,
+                child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          color: Colors.yellow,
-                          width: 100,
-                          height: 100,
-                        ),
-                        Container(
-                          color: Colors.black,
-                          width: 100,
-                          height: 100,
-                        ),
-                        Container(
-                          color: Colors.yellow,
-                          width: 100,
-                          height: 100,
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              )
+                    child: Container(
+                      color: Colors.yellow,
+                      width: 500,
+                      height: 120,
+                      child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                                color: Colors.blue, width: 100, height: 100),
+                            Container(
+                                color: Colors.black, width: 100, height: 100),
+                            Container(
+                                color: Colors.pink, width: 100, height: 100),
+                          ]),
+                    )),
+              ),
             ],
           ),
         )
