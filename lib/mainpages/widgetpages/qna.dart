@@ -48,45 +48,6 @@ class _QnA extends State<QnA> {
         backgroundColor: Color.fromARGB(255, 249, 248, 253),
         elevation: 0.0,
       ),
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Column(
-            children: [
-              Expanded(
-                child: ListView(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // 반가워요! 컨테이너
-                        Row(
-                          children: [
-                            Container(
-                              color: Color.fromARGB(255, 249, 248, 253),
-                              width: 25,
-                            ),
-                            Container(
-                              color: Color.fromARGB(255, 249, 248, 253),
-                              width: appwidth - 50,
-                              height: 100,
-                            ),
-                            Container(
-                              color: Color.fromARGB(255, 249, 248, 253),
-                              width: 25,
-                            ),
-                          ],
-                        ),
-                        // 작은 아이콘 컨테이너
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
     );
   }
 }
