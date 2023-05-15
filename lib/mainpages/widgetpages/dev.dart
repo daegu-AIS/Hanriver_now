@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hanriver_now/mainpages/mylikescreen.dart';
 
 class Developer extends StatefulWidget {
-  AreaInfo areaInfo;
-  Developer(this.areaInfo);
-
   @override
   _Developer createState() => _Developer();
 }

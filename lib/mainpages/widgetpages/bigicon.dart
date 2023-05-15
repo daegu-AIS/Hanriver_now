@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hanriver_now/mainpages/mylikescreen.dart';
-import 'package:hanriver_now/areapages/areapage.dart';
-import 'package:hanriver_now/areapages/overview.dart';
 import 'package:hanriver_now/areapages/gwangnaru.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' as root_bundle;
@@ -12,8 +10,9 @@ import 'package:xml2json/xml2json.dart';
 
 class BigWidget extends StatefulWidget {
   AreaInfo areaInfo;
+  String nightday;
 
-  BigWidget(this.areaInfo);
+  BigWidget(this.areaInfo, this.nightday);
   @override
   _BigWidget createState() => _BigWidget();
 }
@@ -77,7 +76,8 @@ class _BigWidget extends State<BigWidget> {
     return Column(
       children: [
         Container(
-          color: Color.fromARGB(255, 249, 248, 253),
+          // color: Color.fromARGB(255, 249, 248, 253),
+          // color: Colors.red,
           margin: EdgeInsets.only(top: 20, left: 20, right: 20),
           child: Stack(
             children: [
@@ -90,8 +90,9 @@ class _BigWidget extends State<BigWidget> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                    image: Image.asset(
-                            "assets/images/${widget.areaInfo.areaName}한강공원야경.webp")
+                    image: Image.asset(widget.nightday == "낮"
+                            ? "assets/images/${widget.areaInfo.areaName}한강공원.webp"
+                            : "assets/images/${widget.areaInfo.areaName}한강공원야경.webp")
                         .image,
                     fit: BoxFit.fill,
                   ),
@@ -304,9 +305,9 @@ class _BigWidget extends State<BigWidget> {
                                             ],
                                           );
                                         }
-                                        return Text('  실시간 혼잡도 : 지원안함');
+                                        return Text('  실시간 혼잡도 : ');
                                       } else {
-                                        return Text("  실시간 혼잡도 : 지원안함",
+                                        return Text("  실시간 혼잡도 : ",
                                             style: TextStyle(
                                                 fontSize:
                                                     appwidth * 0.45 * 0.09));

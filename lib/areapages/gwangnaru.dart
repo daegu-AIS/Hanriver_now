@@ -333,82 +333,38 @@ class _GwangNaRu extends State<GwangNaRu> {
                                             Color.fromARGB(255, 168, 147, 255)),
                                   ),
                                 ),
-                                Container(
+                                SizedBox(
                                   // color: Colors.blue,
                                   height: appheight * 0.14,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Container(
-                                          padding: EdgeInsets.only(
-                                              left: 20, right: 5),
-                                          width: appwidth * 0.6,
-                                          height: appheight * 0.14,
-                                          // color: Colors.amber,
-                                          child: FutureBuilder(
-                                            future: http.get(Uri.parse(
-                                                "https://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=GY4ctA033jjd9iwNhcz3adE9fBXYGUYEDxLG9RMIE68Cg3jCD2hRgxgblKO9TBUSNcxK5NU6lPL%2BM3D3Grk23Q%3D%3D&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=${contentid}&contentTypeId=12&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&numOfRows=10&pageNo=1")),
-                                            builder: (context, snapshot) {
-                                              if (snapshot.hasData) {
-                                                var getXmlData =
-                                                    snapshot.data!.body;
-                                                var data = jsonDecode(
-                                                    utf8.decode(getXmlData.runes
-                                                        .toList()));
-                                                overview = data['response']
-                                                        ['body']['items']
-                                                    ['item'][0]['overview'];
-                                                overview = overview.replaceAll(
-                                                    RegExp(
-                                                        '[^ac-qs-zA-Z0-9가-힣.\\sぁ-ゔァ-ヴー々〆〤一-龥]'),
-                                                    "");
-                                                // print(appheight);
-                                                return Column(children: [
-                                                  Flexible(
-                                                      child: RichText(
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: appheight > 820
-                                                        ? 5
-                                                        : appheight > 700
-                                                            ? 4
-                                                            : 3,
-                                                    text: TextSpan(
-                                                      text: overview,
-                                                      style: TextStyle(
-                                                          fontSize:
-                                                              appwidth * 0.05,
-                                                          fontFamily:
-                                                              'EastSeaDokdo',
-                                                          color: Colors.black),
-                                                    ),
-                                                  )),
-                                                ]);
-                                              } else {
-                                                return Column(children: [
-                                                  Flexible(
-                                                      child: RichText(
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: appheight > 820
-                                                        ? 5
-                                                        : appheight > 700
-                                                            ? 4
-                                                            : 3,
-                                                    text: TextSpan(
-                                                      text: "Loading...",
-                                                      style: TextStyle(
-                                                          fontSize:
-                                                              appwidth * 0.05,
-                                                          fontFamily:
-                                                              'EastSeaDokdo',
-                                                          color: Colors.black),
-                                                    ),
-                                                  )),
-                                                ]);
-                                              }
-                                            },
+                                        padding:
+                                            EdgeInsets.only(left: 20, right: 5),
+                                        width: appwidth * 0.6,
+                                        height: appheight * 0.14,
+                                        // color: Colors.amber,
+                                        child: Column(children: [
+                                          Flexible(
+                                              child: RichText(
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: appheight > 820
+                                                ? 5
+                                                : appheight > 700
+                                                    ? 4
+                                                    : 3,
+                                            text: TextSpan(
+                                              text: snapshot.data[contentid]
+                                                  ['overviw'],
+                                              style: TextStyle(
+                                                  fontSize: appwidth * 0.05,
+                                                  fontFamily: 'EastSeaDokdo',
+                                                  color: Colors.black),
+                                            ),
                                           )),
+                                        ]),
+                                      ),
                                       Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
@@ -464,8 +420,9 @@ class _GwangNaRu extends State<GwangNaRu> {
                                                           BorderRadius.circular(
                                                               15.0),
                                                     ))),
-                                                onPressed: () =>
-                                                    Overview(overview),
+                                                onPressed: () => Overview(
+                                                    snapshot.data[contentid]
+                                                        ['overviw']),
                                                 child: Text(
                                                   '상세 정보',
                                                   style: TextStyle(

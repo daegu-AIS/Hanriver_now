@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hanriver_now/mainpages/mylikescreen.dart';
 
 class QnA extends StatefulWidget {
-  AreaInfo areaInfo;
-  QnA(this.areaInfo);
-
   @override
   _QnA createState() => _QnA();
 }

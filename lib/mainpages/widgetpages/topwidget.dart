@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:ntp/ntp.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:xml2json/xml2json.dart';
 
 class TopWidget extends StatefulWidget {
   @override
@@ -6,6 +11,14 @@ class TopWidget extends StatefulWidget {
 }
 
 class _TopWidget extends State<TopWidget> {
+  Future<DateTime> DateTimeNow() async {
+    DateTime _myTime;
+    _myTime = await NTP.now();
+    _myTime = _myTime.toUtc().add(Duration(hours: 9));
+
+    return _myTime;
+  }
+
   @override
   Widget build(BuildContext context) {
     final appheight = MediaQuery.of(context).size.height;
@@ -59,7 +72,7 @@ class _TopWidget extends State<TopWidget> {
             ),
             margin: EdgeInsets.only(left: appwidth / 4 * 3),
           ),
-          Container(
+          SizedBox(
             width: appwidth,
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -91,7 +104,7 @@ class _TopWidget extends State<TopWidget> {
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 width: appwidth,
                 child: Text(
-                  "한번 보실래요?",
+                  "즐겨봐요",
                   style: TextStyle(
                       fontFamily: 'EastSeaDokdo',
                       fontSize: 30,

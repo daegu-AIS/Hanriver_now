@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hanriver_now/mainpage.dart';
 import 'package:hanriver_now/mainpages/mylikescreen.dart';
 
 class LandingPage extends StatefulWidget {

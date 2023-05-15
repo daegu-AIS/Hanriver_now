@@ -7,9 +7,6 @@ import 'package:hanriver_now/mainpages/widgetpages/service.dart';
 import 'package:hanriver_now/mainpages/widgetpages/qna.dart';
 
 class ShowGridScreen extends StatefulWidget {
-  AreaInfo areaInfo;
-
-  ShowGridScreen(this.areaInfo);
   @override
   _ShowGridScreen createState() => _ShowGridScreen();
 }
@@ -17,8 +14,64 @@ class ShowGridScreen extends StatefulWidget {
 class _ShowGridScreen extends State<ShowGridScreen> {
   final PageController controller =
       PageController(initialPage: 0, viewportFraction: 1);
-  bool isHidden = false;
-  bool isHidden1 = false;
+  bool isHidden1 = true;
+
+  Widget page(String text, Widget widget, double appwidth, double appheight) {
+    return Container(
+      padding: EdgeInsets.only(left: appwidth * 0.1, top: 20),
+      child: Row(children: [
+        Container(
+          width: appwidth * 0.75,
+          alignment: Alignment.centerLeft,
+          child: Text(
+            text,
+            style: TextStyle(fontSize: 30),
+          ),
+        ),
+        Container(
+          alignment: Alignment.center,
+          width: appwidth * 0.1,
+          child: IconButton(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            padding: EdgeInsets.zero, // 패딩 설정
+            constraints: BoxConstraints(),
+            alignment: Alignment.topLeft,
+            onPressed: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, a, b) {
+                    return widget;
+                  },
+                  transitionsBuilder: (
+                    BuildContext context,
+                    Animation<double> animation,
+                    Animation<double> secondaryAnimation,
+                    Widget child,
+                  ) {
+                    var begin = Offset(1.0, 0.0);
+                    var end = Offset.zero;
+                    var curve = Curves.ease;
+                    var tween = Tween(begin: begin, end: end)
+                        .chain(CurveTween(curve: curve));
+                    return SlideTransition(
+                      position: animation.drive(tween),
+                      child: child,
+                    );
+                  },
+                ),
+              );
+            },
+            icon: Icon(
+              Icons.arrow_forward_ios,
+              size: 25,
+            ),
+          ),
+        ),
+      ]),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,264 +151,15 @@ class _ShowGridScreen extends State<ShowGridScreen> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        page("서비스 정보", ServiceInfo(), appwidth, appheight),
+                        page("QnA", QnA(), appwidth, appheight),
+                        page("개발자 정보", Developer(), appwidth, appheight),
+                        // page("오픈소스 라이선스", OpenSource(), appwidth, appheight),
                         Container(
                           padding:
                               EdgeInsets.only(left: appwidth * 0.1, top: 20),
-                          // alignment: Alignment.center,
-                          // color: Colors.amber,
-
                           child: Row(children: [
                             Container(
-                              // padding: EdgeInsets.only(left: appwidth * 0.1),
-                              // color: Colors.amber,
-                              width: appwidth * 0.75,
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "오픈소스 라이선스",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              // color: Colors.red,
-                              width: appwidth * 0.1,
-                              child: IconButton(
-                                splashColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                padding: EdgeInsets.zero, // 패딩 설정
-                                constraints: BoxConstraints(),
-                                alignment: Alignment.topLeft,
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (context, a, b) {
-                                        return OpenSource(gwangnaru);
-                                      },
-                                      transitionsBuilder: (
-                                        BuildContext context,
-                                        Animation<double> animation,
-                                        Animation<double> secondaryAnimation,
-                                        Widget child,
-                                      ) {
-                                        var begin = Offset(1.0, 0.0);
-                                        var end = Offset.zero;
-                                        var curve = Curves.ease;
-                                        var tween = Tween(
-                                                begin: begin, end: end)
-                                            .chain(CurveTween(curve: curve));
-                                        return SlideTransition(
-                                          position: animation.drive(tween),
-                                          child: child,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                                icon: Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 25,
-                                ),
-                              ),
-                            ),
-                          ]),
-                        ),
-                        Container(
-                          padding:
-                              EdgeInsets.only(left: appwidth * 0.1, top: 20),
-                          // alignment: Alignment.center,
-                          // color: Colors.amber,
-
-                          child: Row(children: [
-                            Container(
-                              // padding: EdgeInsets.only(left: appwidth * 0.1),
-                              // color: Colors.amber,
-                              width: appwidth * 0.75,
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "개발자",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              // color: Colors.red,
-                              width: appwidth * 0.1,
-                              child: IconButton(
-                                splashColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                padding: EdgeInsets.zero, // 패딩 설정
-                                constraints: BoxConstraints(),
-                                alignment: Alignment.topLeft,
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (context, a, b) {
-                                        return Developer(gwangnaru);
-                                      },
-                                      transitionsBuilder: (
-                                        BuildContext context,
-                                        Animation<double> animation,
-                                        Animation<double> secondaryAnimation,
-                                        Widget child,
-                                      ) {
-                                        var begin = Offset(1.0, 0.0);
-                                        var end = Offset.zero;
-                                        var curve = Curves.ease;
-                                        var tween = Tween(
-                                                begin: begin, end: end)
-                                            .chain(CurveTween(curve: curve));
-                                        return SlideTransition(
-                                          position: animation.drive(tween),
-                                          child: child,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                                icon: Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 25,
-                                ),
-                              ),
-                            ),
-                          ]),
-                        ),
-                        Container(
-                          padding:
-                              EdgeInsets.only(left: appwidth * 0.1, top: 20),
-                          // alignment: Alignment.center,
-                          // color: Colors.amber,
-
-                          child: Row(children: [
-                            Container(
-                              // padding: EdgeInsets.only(left: appwidth * 0.1),
-                              // color: Colors.amber,
-                              width: appwidth * 0.75,
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "서비스 안내",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              // color: Colors.red,
-                              width: appwidth * 0.1,
-                              child: IconButton(
-                                splashColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                padding: EdgeInsets.zero, // 패딩 설정
-                                constraints: BoxConstraints(),
-                                alignment: Alignment.topLeft,
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (context, a, b) {
-                                        return ServiceInfo(gwangnaru);
-                                      },
-                                      transitionsBuilder: (
-                                        BuildContext context,
-                                        Animation<double> animation,
-                                        Animation<double> secondaryAnimation,
-                                        Widget child,
-                                      ) {
-                                        var begin = Offset(1.0, 0.0);
-                                        var end = Offset.zero;
-                                        var curve = Curves.ease;
-                                        var tween = Tween(
-                                                begin: begin, end: end)
-                                            .chain(CurveTween(curve: curve));
-                                        return SlideTransition(
-                                          position: animation.drive(tween),
-                                          child: child,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                                icon: Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 25,
-                                ),
-                              ),
-                            ),
-                          ]),
-                        ),
-                        Container(
-                          padding:
-                              EdgeInsets.only(left: appwidth * 0.1, top: 20),
-                          // alignment: Alignment.center,
-                          // color: Colors.amber,
-
-                          child: Row(children: [
-                            Container(
-                              // padding: EdgeInsets.only(left: appwidth * 0.1),
-                              // color: Colors.amber,
-                              width: appwidth * 0.75,
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "Q&A",
-                                style: TextStyle(fontSize: 30),
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              // color: Colors.red,
-                              width: appwidth * 0.1,
-                              child: IconButton(
-                                splashColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                padding: EdgeInsets.zero, // 패딩 설정
-                                constraints: BoxConstraints(),
-                                alignment: Alignment.topLeft,
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (context, a, b) {
-                                        return QnA(gwangnaru);
-                                      },
-                                      transitionsBuilder: (
-                                        BuildContext context,
-                                        Animation<double> animation,
-                                        Animation<double> secondaryAnimation,
-                                        Widget child,
-                                      ) {
-                                        var begin = Offset(1.0, 0.0);
-                                        var end = Offset.zero;
-                                        var curve = Curves.ease;
-                                        var tween = Tween(
-                                                begin: begin, end: end)
-                                            .chain(CurveTween(curve: curve));
-                                        return SlideTransition(
-                                          position: animation.drive(tween),
-                                          child: child,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                                icon: Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 25,
-                                ),
-                              ),
-                            ),
-                          ]),
-                        ),
-                        Container(
-                          padding:
-                              EdgeInsets.only(left: appwidth * 0.1, top: 20),
-
-                          // alignment: Alignment.center,
-                          // color: Colors.amber,
-                          child: Row(children: [
-                            Container(
-                              // padding: EdgeInsets.only(left: appwidth * 0.1),
-                              // color: Colors.amber,
                               width: appwidth * 0.75,
                               alignment: Alignment.centerLeft,
                               child: Text(
@@ -365,7 +169,6 @@ class _ShowGridScreen extends State<ShowGridScreen> {
                             ),
                             Container(
                               alignment: Alignment.center,
-                              // color: Colors.red,
                               width: appwidth * 0.1,
                               child: IconButton(
                                 splashColor: Colors.transparent,
@@ -380,7 +183,7 @@ class _ShowGridScreen extends State<ShowGridScreen> {
                                 },
                                 icon: Icon(
                                   isHidden1
-                                      ? Icons.arrow_drop_down
+                                      ? Icons.keyboard_arrow_down_rounded
                                       : Icons.close,
                                   size: 30,
                                 ),
@@ -391,9 +194,24 @@ class _ShowGridScreen extends State<ShowGridScreen> {
                         Offstage(
                           offstage: isHidden1,
                           child: Container(
+                            decoration: BoxDecoration(
+                              // color: Color.fromARGB(255, 249, 248, 253),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromARGB(127, 249, 248, 253),
+                                ),
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: -5,
+                                  blurRadius: 3,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                            ),
                             width: appwidth * 0.85,
                             height: 100,
-                            color: Color.fromARGB(255, 191, 188, 202),
+                            // color: Color.fromARGB(255, 191, 188, 202),
                             child: Icon(
                               Icons.flutter_dash,
                               size: 70,

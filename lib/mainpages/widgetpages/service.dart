@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hanriver_now/mainpages/mylikescreen.dart';
 
 class ServiceInfo extends StatefulWidget {
-  AreaInfo areaInfo;
-  ServiceInfo(this.areaInfo);
-
   @override
   _ServiceInfo createState() => _ServiceInfo();
 }
