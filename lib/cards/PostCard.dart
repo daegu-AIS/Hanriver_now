@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:hanriver_now/mainpages/mylikescreen.dart';
 
 class ApiTest {
   final String name;
@@ -22,7 +23,8 @@ class ApiTest {
 
 class PostCard extends StatefulWidget {
   int number;
-  PostCard({this.number = 0});
+  AreaInfo areaInfo;
+  PostCard({this.number = 0, required this.areaInfo});
 
   @override
   _PostCardState createState() => _PostCardState();
@@ -36,8 +38,7 @@ class _PostCardState extends State<PostCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Column(
+    return Column(
       children: [
         Container(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -49,25 +50,27 @@ class _PostCardState extends State<PostCard> {
             Row(children: [
               CircleAvatar(
                 radius: 20,
-                backgroundImage: NetworkImage(
-                    'https://picsum.photos/seed/${widget.number}/400/400'),
+                backgroundImage: Image.asset(
+                        'assets/images/${widget.areaInfo.areaName}한강공원.webp')
+                    .image,
               ),
               SizedBox(
                 width: 10,
               ),
-              Text('사용자 ${widget.number}'),
+              Text(widget.areaInfo.areaName),
             ]),
             Icon(Icons.more_vert)
           ]),
         ),
         Container(
-            height: 300,
-            width: MediaQuery.of(context).size.width,
-            color: Colors.white,
-            child: Image.network(
-              'https://picsum.photos/seed/${widget.number}/400/400',
-              fit: BoxFit.cover,
-            )),
+          height: 300,
+          width: MediaQuery.of(context).size.width,
+          color: Colors.white,
+          child: Image.asset(
+            'assets/images/${widget.areaInfo.areaName}한강공원.webp',
+            fit: BoxFit.cover,
+          ),
+        ),
         Container(
           height: 40,
           padding: EdgeInsets.symmetric(horizontal: 10),
@@ -233,6 +236,6 @@ class _PostCardState extends State<PostCard> {
           ]),
         ),
       ],
-    ));
+    );
   }
 }

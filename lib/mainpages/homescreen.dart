@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hanriver_now/cards/PostCard.dart';
+import 'package:hanriver_now/mainpages/mylikescreen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,10 +12,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Container(
         child: ListView.separated(
-      itemCount: 10,
+      itemCount: 10, //
       itemBuilder: (BuildContext context, int index) {
         return PostCard(
           number: index,
+          areaInfo: AreaList[index],
         );
       },
       separatorBuilder: (BuildContext context, int index) {

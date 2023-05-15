@@ -72,7 +72,7 @@ class _AreaPageState extends State<AreaPage> {
             //Dialog Main Title
             title: Column(
               children: <Widget>[
-                new Text("Overview"),
+                Text("Overview"),
               ],
             ),
             //
@@ -81,13 +81,13 @@ class _AreaPageState extends State<AreaPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "${text}",
+                  text,
                 ),
               ],
             ),
             actions: <Widget>[
-              new TextButton(
-                child: new Text("확인"),
+              TextButton(
+                child: Text("확인"),
                 onPressed: () {
                   Navigator.pop(context);
                 },

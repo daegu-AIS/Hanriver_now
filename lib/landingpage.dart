@@ -13,8 +13,8 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
-    Timer(Duration(seconds: 5), () {
-      Get.offAll(MainPage());
+    Timer(Duration(seconds: 2), () {
+      Get.offAll(MyLikeScreen());
     });
     super.initState();
   }
@@ -28,7 +28,8 @@ class _LandingPageState extends State<LandingPage> {
         SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: Image.asset('assets/images/splash.png', fit: BoxFit.cover),
+          child: Image.asset('assets/images/인트로_AdobeExpress.gif',
+              fit: BoxFit.fitHeight),
         ),
       ],
     ));
