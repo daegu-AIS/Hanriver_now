@@ -85,7 +85,8 @@ packages:
     dependency: "direct main"
     description:
       name: cp949
-      url: "https://pub.dartlang.org"
+      sha256: "699a487ab0824bd86420887cd805225b3fade70e8fb487d787e90cc872c9c007"
+      url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
   crypto:
@@ -259,7 +260,8 @@ packages:
     dependency: "direct main"
     description:
       name: page_view_dot_indicator
-      url: "https://pub.dartlang.org"
+      sha256: "072aa63f4fe94351d921ea0f83ae86089aed9b53a624ae34317e96caff73a635"
+      url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
   path:
@@ -303,7 +305,8 @@ packages:
     dependency: "direct main"
     description:
       name: smooth_page_indicator
-      url: "https://pub.dartlang.org"
+      sha256: "725bc638d5e79df0c84658e1291449996943f93bacbc2cec49963dbbab48d8ae"
+      url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
   source_span:
