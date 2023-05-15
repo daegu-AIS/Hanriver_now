@@ -142,6 +142,31 @@ class SV extends StatelessWidget {
                     color: Colors.red,
                     width: 300,
                     height: 300,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          color: Colors.yellow,
+                          width: 100,
+                          height: 100,
+                        ),
+                        Container(
+                          color: Colors.black,
+                          width: 100,
+                          height: 100,
+                        ),
+                        Container(
+                          color: Colors.yellow,
+                          width: 100,
+                          height: 100,
+                        ),
+                      ],
+                    ),
                   )
                 ],
               )
