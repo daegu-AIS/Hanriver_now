@@ -207,7 +207,7 @@ class _MyLikeScreenState extends State<MyLikeScreen> {
                         onPressed: () {
                           Navigator.push(context, PageRouteBuilder(
                             pageBuilder: (context, a, b) {
-                              return OverView(gwangnaru);
+                              return ShowGridScreen(gwangnaru);
                             },
                           ));
                         },

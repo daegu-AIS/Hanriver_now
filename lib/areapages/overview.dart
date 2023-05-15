@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hanriver_now/areapages/overview.dart';
 import 'package:hanriver_now/mainpages/mylikescreen.dart';
-import 'package:hanriver_now/mainpages/showgridscreen.dart';
 import 'package:flutter/services.dart';
 
 class OverView extends StatefulWidget {

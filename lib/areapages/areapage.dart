@@ -101,13 +101,13 @@ class _AreaPageState extends State<AreaPage> {
   Widget build(BuildContext context) {
     var overview = '';
     final apiUrl1 =
-        'http://openapi.seoul.go.kr:8088/426562516e7768643130305972556f4d/xml/citydata/1/5/' +
-            '${widget.areaName}';
+        'http://openapi.seoul.go.kr:8088/426562516e7768643130305972556f4d/xml/citydata/1/5/'
+        '${widget.areaName}';
     final apiUrl2 =
-        'https://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=GY4ctA033jjd9iwNhcz3adE9fBXYGUYEDxLG9RMIE68Cg3jCD2hRgxgblKO9TBUSNcxK5NU6lPL%2BM3D3Grk23Q%3D%3D&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId=' +
-            '${widget.contentid}' +
-            '&contentTypeId=12&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&numOfRows=10&pageNo=1'
-                '${widget.areaName}';
+        'https://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=GY4ctA033jjd9iwNhcz3adE9fBXYGUYEDxLG9RMIE68Cg3jCD2hRgxgblKO9TBUSNcxK5NU6lPL%2BM3D3Grk23Q%3D%3D&MobileOS=ETC&MobileApp=AppTest&_type=json&contentId='
+        '${widget.contentid}'
+        '&contentTypeId=12&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&numOfRows=10&pageNo=1'
+        '${widget.areaName}';
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,

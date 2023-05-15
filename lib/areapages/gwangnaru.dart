@@ -39,8 +39,7 @@ class _GwangNaRu extends State<GwangNaRu> {
       builder: (context, snapshot) {
         Future<dynamic> fetchData(int count) async {
           var url = Uri.parse(
-              "https://www.ihangangpark.kr/parking/region/region" +
-                  widget.areaInfo.number.toString());
+              "https://www.ihangangpark.kr/parking/region/region${widget.areaInfo.number}");
           var response = await http.get(url);
 
           if (response.statusCode == 200) {
@@ -292,7 +291,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                         ],
                       ),
                       Positioned(
-                        top: appheight * 0.23,
+                        top: appheight * 0.25,
                         left: appwidth * 0.05,
                         width: appwidth * 0.9,
                         child: Container(
@@ -508,7 +507,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(left: 20, top: 15),
+                  padding: EdgeInsets.only(left: 20, top: 30),
                   child: Text(
                     "시설 현황",
                     style: TextStyle(fontSize: appheight * 0.04),
