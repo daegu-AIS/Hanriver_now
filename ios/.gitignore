@@ -4,6 +4,7 @@
 *.moved-aside
 *.pbxuser
 *.perspectivev3
+
 **/*sync/
 .sconsign.dblite
 .tags*
@@ -26,6 +27,8 @@ Flutter/flutter_assets/
 Flutter/flutter_export_environment.sh
 ServiceDefinitions.json
 Runner/GeneratedPluginRegistrant.*
+detail.json
+license.json
 assets/
 
 # Exceptions to above rules.
