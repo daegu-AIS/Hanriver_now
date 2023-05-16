@@ -89,31 +89,8 @@ class _MyLikeScreenState extends State<MyLikeScreen> {
               Expanded(
                 child: ListView(
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // 반가워요! 컨테이너
-                        TopWidget(),
-                        Row(
-                          children: [
-                            Container(
-                              color: Color.fromARGB(255, 249, 248, 253),
-                              width: 25,
-                            ),
-                            Container(
-                              color: Color.fromARGB(255, 249, 248, 253),
-                              width: appwidth - 50,
-                              height: 100,
-                            ),
-                            Container(
-                              color: Color.fromARGB(255, 249, 248, 253),
-                              width: 25,
-                            ),
-                          ],
-                        ),
-                        // 작은 아이콘 컨테이너
-                      ],
-                    ),
+                    TopWidget(),
+                    SizedBox(height: 20),
                     BigWidget(gwangnaru, nightday),
                     BigWidget(gangseo, nightday),
                     BigWidget(jamsil, nightday),
@@ -267,13 +244,13 @@ class _MyLikeScreenState extends State<MyLikeScreen> {
                         return HomePage(appwidth, nightday);
                       }
                     } else {
-                      var nightday = "밤";
+                      var nightday = "";
                       return HomePage(appwidth, nightday);
                     }
                   },
                 );
               } else {
-                var nightday = "밤";
+                var nightday = "";
                 return HomePage(appwidth, nightday);
               }
             },

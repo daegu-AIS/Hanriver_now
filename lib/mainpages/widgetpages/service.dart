@@ -52,6 +52,8 @@ class _ServiceInfo extends State<ServiceInfo> {
 class SV extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final appheight = MediaQuery.of(context).size.height;
+    final appwidth = MediaQuery.of(context).size.width;
     return PageView(
       children: <Widget>[
         Column(
@@ -69,7 +71,7 @@ class SV extends StatelessWidget {
             )),
             Container(
                 child: Container(
-              padding: EdgeInsets.only(top: 500),
+              padding: EdgeInsets.only(top: 300),
               child: Text(
                 '옆으로 슬라이드',
                 style: TextStyle(
@@ -79,9 +81,8 @@ class SV extends StatelessWidget {
               ),
             )),
             Container(
-                child: Container(
-                    padding: EdgeInsets.only(top: 40),
-                    child: Icon(size: 40.0, Icons.swipe_left)))
+                padding: EdgeInsets.only(top: 40),
+                child: Icon(size: 30.0, Icons.swipe_left))
           ],
         ),
         Container(
@@ -110,8 +111,8 @@ class SV extends StatelessWidget {
                     ),
                   )),
               Container(
-                width: 300,
-                height: 300,
+                width: appwidth * 0.5,
+                height: appwidth * 0.5,
                 color: Colors.transparent,
                 child: Align(
                     alignment: Alignment.center,

@@ -90,9 +90,11 @@ class _BigWidget extends State<BigWidget> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                    image: Image.asset(widget.nightday == "낮"
-                            ? "assets/images/${widget.areaInfo.areaName}한강공원.webp"
-                            : "assets/images/${widget.areaInfo.areaName}한강공원야경.webp")
+                    image: Image.asset(widget.nightday == "밤"
+                            ? "assets/images/${widget.areaInfo.areaName}한강공원야경.webp"
+                            : widget.nightday == "낮"
+                                ? "assets/images/${widget.areaInfo.areaName}한강공원.webp"
+                                : "")
                         .image,
                     fit: BoxFit.fill,
                   ),
@@ -137,10 +139,10 @@ class _BigWidget extends State<BigWidget> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              SizedBox(
+                              Container(
                                 // color: Colors.red,
                                 width: appwidth * 0.45 * 0.31,
-                                height: appheight * 0.158 * 0.02,
+                                height: appheight * 0.158 * 0.01,
                               ),
                               Row(
                                 children: [
@@ -181,7 +183,7 @@ class _BigWidget extends State<BigWidget> {
                           ),
                           SizedBox(
                             width: appwidth * 0.45 * 0.95,
-                            height: appheight * 0.158 * 0.15,
+                            height: appheight * 0.158 * 0.1,
                           ),
                           SizedBox(
                             width: appwidth * 0.45,
@@ -324,7 +326,7 @@ class _BigWidget extends State<BigWidget> {
                               "더 알아보기",
                               textAlign: TextAlign.right,
                               style: TextStyle(
-                                fontSize: appwidth * 0.45 * 0.08,
+                                fontSize: appheight * 0.018,
                               ),
                             ),
                           ),
