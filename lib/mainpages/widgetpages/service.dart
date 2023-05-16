@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_connect/sockets/src/socket_notifier.dart';
+import 'package:hanriver_now/landingpage.dart';
+import 'dart:io';
 
 class ServiceInfo extends StatefulWidget {
   const ServiceInfo({super.key});
@@ -35,7 +37,7 @@ class _ServiceInfo extends State<ServiceInfo> {
             Container(
               padding: EdgeInsets.only(top: 10),
               child: Text(
-                '서비스',
+                'Guide',
                 style: TextStyle(fontSize: 25, color: Colors.black),
               ),
             ),
@@ -265,9 +267,58 @@ class SV extends StatelessWidget {
             )
           ]),
         ),
-        Container(
-          color: Colors.white,
-        ) //가이드 3페이지 상세 페이지
+        Column(
+          children: [
+            Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(top: appheight * 0.1),
+                  child: Text(
+                    'The End',
+                    style: TextStyle(fontSize: 70, color: Colors.black),
+                  ),
+                ),
+                Container(
+                    padding: EdgeInsets.only(top: appheight * 0.5),
+                    child: Column(
+                      children: [
+                        Text(
+                          "홈으로 돌아가",
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                        ),
+                        Text(
+                          "한강정보 받아보기",
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                        ),
+                      ],
+                    )),
+                Container(
+                    padding: EdgeInsets.only(
+                        top: appheight * 0.02,
+                        left: appheight * 0.05,
+                        right: appheight * 0.05),
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      },
+                      child: CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+                          child: CircleAvatar(
+                              backgroundColor:
+                                  Color.fromRGBO(168, 147, 255, 0.6),
+                              radius: 35,
+                              child: Icon(
+                                Icons.favorite_border,
+                                size: 30,
+                                color: Colors.black,
+                              ))),
+                    ))
+              ],
+            )
+          ],
+        )
       ],
     );
   }
