@@ -16,7 +16,7 @@ class _TopWidget extends State<TopWidget> {
     final appheight = MediaQuery.of(context).size.height;
     final appwidth = MediaQuery.of(context).size.width;
     const String apiUrl =
-        'http://openapi.seoul.go.kr:8088/776a6b515877686438366d4b4b5847/xml/citydata/1/5/';
+        'http://openapi.seoul.go.kr:8088/776a6b515877686438366d4b4b5847/xml/citydata/1/5/'; // a
     return FutureBuilder(
       future: http.get(Uri.parse('$apiUrl남산공원')),
       builder: (context, snapshot) {
