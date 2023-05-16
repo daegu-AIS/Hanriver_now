@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hanriver_now/mainpage.dart';
 import 'package:hanriver_now/mainpages/mylikescreen.dart';
 
 class LandingPage extends StatefulWidget {
@@ -13,8 +12,8 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
-    Timer(Duration(seconds: 3), () {
-      Get.offAll(MainPage());
+    Timer(Duration(seconds: 2), () {
+      Get.offAll(MyLikeScreen());
     });
     super.initState();
   }
@@ -25,10 +24,11 @@ class _LandingPageState extends State<LandingPage> {
         body: Stack(
       alignment: Alignment.center,
       children: [
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: Image.asset('assets/images/splash.png', fit: BoxFit.cover),
+          child: Image.asset('assets/images/인트로_AdobeExpress.gif',
+              fit: BoxFit.fitHeight),
         ),
       ],
     ));
