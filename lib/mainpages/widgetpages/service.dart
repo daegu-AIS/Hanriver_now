@@ -52,13 +52,15 @@ class _ServiceInfo extends State<ServiceInfo> {
 class SV extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final appheight = MediaQuery.of(context).size.height;
+    final appwidth = MediaQuery.of(context).size.width;
     return PageView(
       children: <Widget>[
         Column(
           children: [
             Container(
                 child: Container(
-              padding: EdgeInsets.only(top: 40),
+              padding: EdgeInsets.only(top: appheight * 0.1),
               child: Text(
                 'App Guide',
                 style: TextStyle(
@@ -69,7 +71,7 @@ class SV extends StatelessWidget {
             )),
             Container(
                 child: Container(
-              padding: EdgeInsets.only(top: 500),
+              padding: EdgeInsets.only(top: appheight * 0.5),
               child: Text(
                 '옆으로 슬라이드',
                 style: TextStyle(
@@ -80,7 +82,7 @@ class SV extends StatelessWidget {
             )),
             Container(
                 child: Container(
-                    padding: EdgeInsets.only(top: 40),
+                    padding: EdgeInsets.only(top: appheight * 0.05),
                     child: Icon(size: 40.0, Icons.swipe_left)))
           ],
         ),
@@ -100,7 +102,10 @@ class SV extends StatelessWidget {
                   elevation: 6.0,
                   child: Container(
                     padding: EdgeInsets.only(
-                        top: 50, bottom: 50, left: 50, right: 50),
+                        top: appheight * 0.05,
+                        bottom: appheight * 0.05,
+                        left: appheight * 0.05,
+                        right: appheight * 0.05),
                     child: Text(
                       '날씨 정보 제공',
                       style: TextStyle(
@@ -110,8 +115,8 @@ class SV extends StatelessWidget {
                     ),
                   )),
               Container(
-                width: 300,
-                height: 300,
+                width: appheight * 0.3,
+                height: appheight * 0.3,
                 color: Colors.transparent,
                 child: Align(
                     alignment: Alignment.center,
@@ -122,7 +127,10 @@ class SV extends StatelessWidget {
                         elevation: 6.0,
                         child: Container(
                           padding: EdgeInsets.only(
-                              top: 10, bottom: 10, left: 10, right: 10),
+                              top: appheight * 0.02,
+                              bottom: appheight * 0.02,
+                              left: appheight * 0.02,
+                              right: appheight * 0.02),
                           child: Text(
                             '클릭시 상세정보 \n  페이지로 이동',
                             style: TextStyle(
@@ -131,34 +139,89 @@ class SV extends StatelessWidget {
                                 color: Colors.black),
                           ),
                         ))),
-              ),
+              ), //가이드 1페이지
               Container(
-                color: Colors.red,
-                width: 500,
-                height: 300,
+                width: appheight * 0.45,
+                height: appheight * 0.4,
                 child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
-                      color: Colors.yellow,
-                      width: 500,
-                      height: 120,
+                      width: appheight * 0.5,
+                      height: appheight * 0.1,
                       child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Container(
-                                color: Colors.blue, width: 100, height: 100),
-                            Container(
-                                color: Colors.black, width: 100, height: 100),
-                            Container(
-                                color: Colors.pink, width: 100, height: 100),
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16.0),
+                              ),
+                              elevation: 4.0,
+                              child: Container(
+                                width: appheight * 0.1,
+                                height: appheight * 0.1,
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "지도 보기",
+                                    style: TextStyle(
+                                        fontFamily: 'EastSeaDokdo',
+                                        fontSize: 30,
+                                        color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16.0),
+                              ),
+                              elevation: 4.0,
+                              child: Container(
+                                width: appheight * 0.1,
+                                height: appheight * 0.1,
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "홈으로",
+                                    style: TextStyle(
+                                        fontFamily: 'EastSeaDokdo',
+                                        fontSize: 30,
+                                        color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16.0),
+                              ),
+                              elevation: 4.0,
+                              child: Container(
+                                width: appheight * 0.1,
+                                height: appheight * 0.1,
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "???",
+                                    style: TextStyle(
+                                        fontFamily: 'EastSeaDokdo',
+                                        fontSize: 30,
+                                        color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ]),
                     )),
               ),
             ],
           ),
-        )
+        ), //가이드 2페이지 홈 화면
+        Container(
+          color: Colors.yellow,
+        ) //가이드 3페이지 지도보기
       ],
     );
   }
