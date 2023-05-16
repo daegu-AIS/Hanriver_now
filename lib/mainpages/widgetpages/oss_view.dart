@@ -113,7 +113,7 @@ class _OssView extends State<OssView> {
       ),
       body: ListView(
         children: [
-          ossView("Version", widget.license['version'], 60, 0),
+          ossView("Version", widget.license['version'] ?? "-", 60, 0),
           ossView("개요", widget.license['description'], 120, 1),
           ossView("HomePage", widget.license['homepage'] ?? "-", 80, 2),
           ossView("repository", widget.license['repository'] ?? "-", 80, 3),
