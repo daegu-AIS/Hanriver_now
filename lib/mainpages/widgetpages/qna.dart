@@ -32,10 +32,7 @@ class _QnA extends State<QnA> {
               padding: EdgeInsets.only(top: 10),
               child: Text(
                 'QnA',
-                style: TextStyle(
-                    fontFamily: 'EastSeaDokdo',
-                    fontSize: 40,
-                    color: Colors.black),
+                style: TextStyle(fontSize: 25, color: Colors.black),
               ),
             ),
           ],

@@ -38,24 +38,24 @@ class _BigWidget extends State<BigWidget> {
     if (traffic == "여유") {
       return Text(
         traffic,
-        style: TextStyle(fontSize: appwidth * 0.45 * 0.09, color: Colors.green),
+        style: TextStyle(fontSize: appwidth * 0.45 * 0.07, color: Colors.green),
       );
     } else if (traffic == "약간 붐빔") {
       return Text(
         traffic,
         style:
-            TextStyle(fontSize: appwidth * 0.45 * 0.09, color: Colors.orange),
+            TextStyle(fontSize: appwidth * 0.45 * 0.07, color: Colors.orange),
       );
     } else if (traffic == "보통") {
       return Text(
         traffic,
         style:
-            TextStyle(fontSize: appwidth * 0.45 * 0.09, color: Colors.yellow),
+            TextStyle(fontSize: appwidth * 0.45 * 0.07, color: Colors.yellow),
       );
     } else if (traffic == "붐빔") {
       return Text(
         traffic,
-        style: TextStyle(fontSize: appwidth * 0.45 * 0.09, color: Colors.red),
+        style: TextStyle(fontSize: appwidth * 0.45 * 0.07, color: Colors.red),
       );
     }
 
@@ -73,187 +73,186 @@ class _BigWidget extends State<BigWidget> {
 
     final appheight = MediaQuery.of(context).size.height;
     final appwidth = MediaQuery.of(context).size.width;
-    return Column(
-      children: [
-        Container(
+    return Column(children: [
+      Container(
           // color: Color.fromARGB(255, 249, 248, 253),
           // color: Colors.red,
           margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-          child: Stack(
-            children: [
-              Container(
-                padding: EdgeInsets.only(
-                    right: appwidth * 0.04, top: appwidth * 0.1),
-                width: appwidth,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: Image.asset(widget.nightday == "낮"
-                            ? "assets/images/${widget.areaInfo.areaName}한강공원.webp"
-                            : "assets/images/${widget.areaInfo.areaName}한강공원야경.webp")
-                        .image,
-                    fit: BoxFit.fill,
-                  ),
+          child: Stack(children: [
+            Container(
+              padding:
+                  EdgeInsets.only(right: appwidth * 0.04, top: appwidth * 0.1),
+              width: appwidth,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  image: Image.asset(widget.nightday == "밤"
+                          ? "assets/images/${widget.areaInfo.areaName}한강공원야경.webp"
+                          : widget.nightday == "낮"
+                              ? "assets/images/${widget.areaInfo.areaName}한강공원.webp"
+                              : "")
+                      .image,
+                  fit: BoxFit.fill,
                 ),
-                height: appheight * 0.24,
-                width: appwidth * 0.64,
-                alignment: Alignment.center,
               ),
-              Positioned(
+              height: appheight * 0.24,
+              width: appwidth * 0.64,
+              alignment: Alignment.center,
+            ),
+            Positioned(
                 top: (appheight * 0.04) / 2,
                 left: appwidth - (appwidth * 0.41) - appwidth * 0.22,
                 child: InkWell(
-                  splashColor: Color.fromARGB(255, 156, 137, 77),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => GwangNaRu(widget.areaInfo)));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    height: appheight * 0.20,
-                    width: appwidth * 0.5,
-                    alignment: Alignment.center,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: appheight * 0.16 * 0.05,
+                    splashColor: Color.fromARGB(255, 156, 137, 77),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  GwangNaRu(widget.areaInfo)));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 3),
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                // color: Colors.red,
-                                width: appwidth * 0.45 * 0.31,
-                                height: appheight * 0.158 * 0.02,
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                        left: appwidth * 0.05,
-                                        top: appheight * 0.002),
-                                    width: appwidth * 0.45,
-                                    height: appheight * 0.158 * 0.3,
-                                    // color: Colors.red,
-                                    child: Text(
-                                      "${widget.areaInfo.areaName} 한강 공원",
+                        ],
+                      ),
+                      height: appheight * 0.20,
+                      width: appwidth * 0.5,
+                      alignment: Alignment.center,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: appheight * 0.16 * 0.05,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  // color: Colors.red,
+                                  width: appwidth * 0.45 * 0.31,
+                                  height: appheight * 0.158 * 0.01,
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          left: appwidth * 0.05,
+                                          top: appheight * 0.008),
+                                      width: appwidth * 0.45,
+                                      height: appheight * 0.158 * 0.3,
+                                      // color: Colors.red,
+                                      child: Text(
+                                        "${widget.areaInfo.areaName} 한강 공원",
+                                        style: TextStyle(
+                                            fontSize: appwidth * 0.45 * 0.12),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: appwidth * 0.45 * 0.9,
+                              child: FutureBuilder(
+                                future: readJson(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                      "  ${snapshot.data[widget.areaInfo.contentid]["addr"]}",
                                       style: TextStyle(
-                                          fontSize: appwidth * 0.45 * 0.16),
+                                          fontSize: appwidth * 0.45 * 0.07),
+                                    );
+                                  } else {
+                                    return CircularProgressIndicator();
+                                  }
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              width: appwidth * 0.45 * 0.95,
+                              height: appheight * 0.158 * 0.15,
+                            ),
+                            SizedBox(
+                              width: appwidth * 0.45,
+                              height: appheight * 0.158 * 0.15,
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: appwidth * 0.45 * 0.04,
+                                  ),
+                                  Icon(
+                                    Icons.circle,
+                                    size: appwidth * 0.45 * 0.065,
+                                    color: Color.fromARGB(255, 211, 200, 255),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: FutureBuilder(
+                                      future: readJson(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          return Text(
+                                              "  안내센터 : ${snapshot.data[widget.areaInfo.contentid]["tel"]}",
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      appwidth * 0.45 * 0.069));
+                                        } else {
+                                          return CircularProgressIndicator();
+                                        }
+                                      },
                                     ),
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                          SizedBox(
-                            width: appwidth * 0.45 * 0.9,
-                            child: FutureBuilder(
-                              future: readJson(),
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  return Text(
-                                    snapshot.data[widget.areaInfo.contentid]
-                                        ["addr"],
-                                    style: TextStyle(
-                                        fontSize: appwidth * 0.45 * 0.08),
-                                  );
-                                } else {
-                                  return CircularProgressIndicator();
-                                }
-                              },
                             ),
-                          ),
-                          SizedBox(
-                            width: appwidth * 0.45 * 0.95,
-                            height: appheight * 0.158 * 0.15,
-                          ),
-                          SizedBox(
-                            width: appwidth * 0.45,
-                            height: appheight * 0.158 * 0.15,
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: appwidth * 0.45 * 0.04,
-                                ),
-                                Icon(
-                                  Icons.circle,
-                                  size: appwidth * 0.45 * 0.065,
-                                  color: Color.fromARGB(255, 211, 200, 255),
-                                ),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: FutureBuilder(
-                                    future: readJson(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        return Text(
-                                            "  안내센터 : ${snapshot.data[widget.areaInfo.contentid]["tel"]}",
-                                            style: TextStyle(
-                                                fontSize:
-                                                    appwidth * 0.45 * 0.09));
-                                      } else {
-                                        return CircularProgressIndicator();
-                                      }
-                                    },
+                            SizedBox(
+                              width: appwidth * 0.45,
+                              height: appheight * 0.158 * 0.15,
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: appwidth * 0.45 * 0.04,
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: appwidth * 0.45,
-                            height: appheight * 0.158 * 0.15,
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: appwidth * 0.45 * 0.04,
-                                ),
-                                Icon(
-                                  Icons.circle,
-                                  size: appwidth * 0.45 * 0.065,
-                                  color: Color.fromARGB(255, 211, 200, 255),
-                                ),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: FutureBuilder(
-                                    future: readJson(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        return Text(
-                                            "  이용요금 : ${snapshot.data[widget.areaInfo.contentid]["infotext3"]}",
-                                            style: TextStyle(
-                                                fontSize:
-                                                    appwidth * 0.45 * 0.09));
-                                      } else {
-                                        return CircularProgressIndicator();
-                                      }
-                                    },
+                                  Icon(
+                                    Icons.circle,
+                                    size: appwidth * 0.45 * 0.065,
+                                    color: Color.fromARGB(255, 211, 200, 255),
                                   ),
-                                ),
-                              ],
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: FutureBuilder(
+                                      future: readJson(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          return Text(
+                                              "  이용요금 : ${snapshot.data[widget.areaInfo.contentid]["infotext3"]}",
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      appwidth * 0.45 * 0.07));
+                                        } else {
+                                          return CircularProgressIndicator();
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: appwidth * 0.45,
-                            height: appheight * 0.158 * 0.15,
-                            child: Row(
-                              children: [
+                            SizedBox(
+                              width: appwidth * 0.45,
+                              height: appheight * 0.158 * 0.15,
+                              child: Row(children: [
                                 SizedBox(
                                   width: appwidth * 0.45 * 0.04,
                                 ),
@@ -263,82 +262,77 @@ class _BigWidget extends State<BigWidget> {
                                   color: Color.fromARGB(255, 211, 200, 255),
                                 ),
                                 Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: FutureBuilder(
-                                    future: http.get(Uri.parse(
-                                        '$apiUrl${widget.areaInfo.areaName}한강공원')),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        final getXmlData = snapshot.data!.body;
-                                        final xml = Xml2Json()
-                                          ..parse(getXmlData);
-                                        final jsonData = xml.toParker();
-                                        var data = jsonDecode(jsonData);
+                                    alignment: Alignment.centerLeft,
+                                    child: FutureBuilder(
+                                        future: http.get(Uri.parse(
+                                            '$apiUrl${widget.areaInfo.areaName}한강공원')),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasData) {
+                                            final getXmlData =
+                                                snapshot.data!.body;
+                                            final xml = Xml2Json()
+                                              ..parse(getXmlData);
+                                            final jsonData = xml.toParker();
+                                            var data = jsonDecode(jsonData);
 
-                                        try {
-                                          if (data["Map"]["RESULT.MESSAGE"] ==
-                                              "해당하는 데이터가 없습니다") {
-                                            return Text("  실시간 혼잡도 : 지원안함",
+                                            try {
+                                              if (data["Map"]
+                                                      ["RESULT.MESSAGE"] ==
+                                                  "해당하는 데이터가 없습니다") {
+                                                return Text("  실시간 혼잡도 : 지원안함",
+                                                    style: TextStyle(
+                                                        fontSize: appwidth *
+                                                            0.45 *
+                                                            0.07));
+                                              }
+                                            } catch (e) {
+                                              return Row(
+                                                children: [
+                                                  Text(
+                                                    "  실시간 혼잡도 : ",
+                                                    style: TextStyle(
+                                                      fontSize: appwidth *
+                                                          0.45 *
+                                                          0.07,
+                                                    ),
+                                                  ),
+                                                  Traffic(
+                                                      data["SeoulRtd.citydata"][
+                                                                      "CITYDATA"]
+                                                                  [
+                                                                  "LIVE_PPLTN_STTS"]
+                                                              [
+                                                              "LIVE_PPLTN_STTS"]
+                                                          ["AREA_CONGEST_LVL"],
+                                                      appwidth)
+                                                ],
+                                              );
+                                            }
+                                            return Text('  실시간 혼잡도 : ');
+                                          } else {
+                                            return Text("  실시간 혼잡도 : ",
                                                 style: TextStyle(
                                                     fontSize: appwidth *
                                                         0.45 *
-                                                        0.09));
+                                                        0.07));
                                           }
-                                        } catch (e) {
-                                          return Row(
-                                            children: [
-                                              Text(
-                                                "  실시간 혼잡도 : ",
-                                                style: TextStyle(
-                                                  fontSize:
-                                                      appwidth * 0.45 * 0.09,
-                                                ),
-                                              ),
-                                              Traffic(
-                                                  data["SeoulRtd.citydata"]
-                                                                  ["CITYDATA"]
-                                                              [
-                                                              "LIVE_PPLTN_STTS"]
-                                                          ["LIVE_PPLTN_STTS"]
-                                                      ["AREA_CONGEST_LVL"],
-                                                  appwidth)
-                                            ],
-                                          );
-                                        }
-                                        return Text('  실시간 혼잡도 : ');
-                                      } else {
-                                        return Text("  실시간 혼잡도 : ",
-                                            style: TextStyle(
-                                                fontSize:
-                                                    appwidth * 0.45 * 0.09));
-                                      }
-                                    },
-                                  ),
-                                ),
-                              ],
+                                        }))
+                              ]),
                             ),
-                          ),
-                          SizedBox(
-                            width: appwidth * 0.45,
-                            child: Text(
-                              "더 알아보기",
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                fontSize: appwidth * 0.45 * 0.08,
+                            Container(
+                              padding: EdgeInsets.only(top: 3),
+                              width: appwidth * 0.45,
+                              child: Text(
+                                "더 알아보기",
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                  fontSize: appheight * 0.012,
+                                ),
                               ),
                             ),
-                          ),
-                        ]),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 15,
-        ),
-      ],
-    );
+                          ]),
+                    )))
+          ]))
+    ]);
   }
 }

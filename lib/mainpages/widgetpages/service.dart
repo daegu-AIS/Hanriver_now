@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/sockets/src/socket_notifier.dart';
 
 class ServiceInfo extends StatefulWidget {
+  const ServiceInfo({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _ServiceInfo createState() => _ServiceInfo();
 }
 
@@ -32,10 +36,7 @@ class _ServiceInfo extends State<ServiceInfo> {
               padding: EdgeInsets.only(top: 10),
               child: Text(
                 '서비스',
-                style: TextStyle(
-                    fontFamily: 'EastSeaDokdo',
-                    fontSize: 40,
-                    color: Colors.black),
+                style: TextStyle(fontSize: 25, color: Colors.black),
               ),
             ),
           ],
@@ -50,40 +51,32 @@ class _ServiceInfo extends State<ServiceInfo> {
 }
 
 class SV extends StatelessWidget {
+  const SV({super.key});
+
   @override
   Widget build(BuildContext context) {
     final appheight = MediaQuery.of(context).size.height;
-    final appwidth = MediaQuery.of(context).size.width;
     return PageView(
       children: <Widget>[
         Column(
           children: [
             Container(
-                child: Container(
               padding: EdgeInsets.only(top: appheight * 0.1),
               child: Text(
                 'App Guide',
-                style: TextStyle(
-                    fontFamily: 'EastSeaDokdo',
-                    fontSize: 70,
-                    color: Colors.black),
+                style: TextStyle(fontSize: 70, color: Colors.black),
               ),
-            )),
+            ),
             Container(
-                child: Container(
               padding: EdgeInsets.only(top: appheight * 0.5),
               child: Text(
                 '옆으로 슬라이드',
-                style: TextStyle(
-                    fontFamily: 'EastSeaDokdo',
-                    fontSize: 30,
-                    color: Colors.black),
+                style: TextStyle(fontSize: 30, color: Colors.black),
               ),
-            )),
+            ),
             Container(
-                child: Container(
-                    padding: EdgeInsets.only(top: appheight * 0.05),
-                    child: Icon(size: 40.0, Icons.swipe_left)))
+                padding: EdgeInsets.only(top: appheight * 0.05),
+                child: Icon(size: 40.0, Icons.swipe_left))
           ],
         ),
         Container(
@@ -108,10 +101,7 @@ class SV extends StatelessWidget {
                         right: appheight * 0.05),
                     child: Text(
                       '날씨 정보 제공',
-                      style: TextStyle(
-                          fontFamily: 'EastSeaDokdo',
-                          fontSize: 30,
-                          color: Colors.black),
+                      style: TextStyle(fontSize: 30, color: Colors.black),
                     ),
                   )),
               Container(
@@ -133,19 +123,16 @@ class SV extends StatelessWidget {
                               right: appheight * 0.02),
                           child: Text(
                             '클릭시 상세정보 \n  페이지로 이동',
-                            style: TextStyle(
-                                fontFamily: 'EastSeaDokdo',
-                                fontSize: 30,
-                                color: Colors.black),
+                            style: TextStyle(fontSize: 30, color: Colors.black),
                           ),
                         ))),
               ), //가이드 1페이지
-              Container(
+              SizedBox(
                 width: appheight * 0.45,
                 height: appheight * 0.4,
                 child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: Container(
+                    child: SizedBox(
                       width: appheight * 0.5,
                       height: appheight * 0.1,
                       child: Row(
@@ -158,7 +145,7 @@ class SV extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(16.0),
                               ),
                               elevation: 4.0,
-                              child: Container(
+                              child: SizedBox(
                                 width: appheight * 0.1,
                                 height: appheight * 0.1,
                                 child: Align(
@@ -166,9 +153,7 @@ class SV extends StatelessWidget {
                                   child: Text(
                                     "지도 보기",
                                     style: TextStyle(
-                                        fontFamily: 'EastSeaDokdo',
-                                        fontSize: 30,
-                                        color: Colors.black),
+                                        fontSize: 20, color: Colors.black),
                                   ),
                                 ),
                               ),
@@ -178,7 +163,7 @@ class SV extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(16.0),
                               ),
                               elevation: 4.0,
-                              child: Container(
+                              child: SizedBox(
                                 width: appheight * 0.1,
                                 height: appheight * 0.1,
                                 child: Align(
@@ -186,9 +171,7 @@ class SV extends StatelessWidget {
                                   child: Text(
                                     "홈으로",
                                     style: TextStyle(
-                                        fontFamily: 'EastSeaDokdo',
-                                        fontSize: 30,
-                                        color: Colors.black),
+                                        fontSize: 20, color: Colors.black),
                                   ),
                                 ),
                               ),
@@ -198,7 +181,7 @@ class SV extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(16.0),
                               ),
                               elevation: 4.0,
-                              child: Container(
+                              child: SizedBox(
                                 width: appheight * 0.1,
                                 height: appheight * 0.1,
                                 child: Align(
@@ -206,9 +189,7 @@ class SV extends StatelessWidget {
                                   child: Text(
                                     "???",
                                     style: TextStyle(
-                                        fontFamily: 'EastSeaDokdo',
-                                        fontSize: 30,
-                                        color: Colors.black),
+                                        fontSize: 20, color: Colors.black),
                                   ),
                                 ),
                               ),
@@ -220,8 +201,73 @@ class SV extends StatelessWidget {
           ),
         ), //가이드 2페이지 홈 화면
         Container(
-          color: Colors.yellow,
-        ) //가이드 3페이지 지도보기
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage('assets/guide/ditaile.png'),
+              // 배경 이미지
+            ),
+          ),
+          child: Column(children: <Widget>[
+            SizedBox(
+              width: appheight * 0.5,
+              height: appheight * 0.6,
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: SizedBox(
+                    width: appheight * 0.3,
+                    height: appheight * 0.4,
+                    child: Column(children: [
+                      SizedBox(
+                        width: appheight * 0.15,
+                        height: appheight * 0.15,
+                      ),
+                      Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        elevation: 4.0,
+                        child: SizedBox(
+                            width: appheight * 0.1,
+                            height: appheight * 0.1,
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                " 주차장 \n정보 표시",
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.black),
+                              ),
+                            )),
+                      ),
+                      SizedBox(
+                        width: appheight * 0.03,
+                        height: appheight * 0.015,
+                      ),
+                      Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        elevation: 4.0,
+                        child: SizedBox(
+                            width: appheight * 0.1,
+                            height: appheight * 0.1,
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "  상세 \n정보 표시",
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.black),
+                              ),
+                            )),
+                      ),
+                    ])),
+              ),
+            )
+          ]),
+        ),
+        Container(
+          color: Colors.white,
+        ) //가이드 3페이지 상세 페이지
       ],
     );
   }

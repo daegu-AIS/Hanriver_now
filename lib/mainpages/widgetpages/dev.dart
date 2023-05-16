@@ -32,10 +32,7 @@ class _Developer extends State<Developer> {
               padding: EdgeInsets.only(top: 10),
               child: Text(
                 '개발자',
-                style: TextStyle(
-                    fontFamily: 'EastSeaDokdo',
-                    fontSize: 40,
-                    color: Colors.black),
+                style: TextStyle(fontSize: 25, color: Colors.black),
               ),
             ),
           ],
