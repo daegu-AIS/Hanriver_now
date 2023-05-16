@@ -29,7 +29,7 @@ class _ServiceInfo extends State<ServiceInfo> {
           children: <Widget>[
             Image.asset(
               'assets/images/title_icon.png',
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
               height: 50,
             ),
             Container(
@@ -82,7 +82,7 @@ class SV extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
               image: AssetImage('assets/guide/home.png'), // 배경 이미지
             ),
           ),
@@ -203,7 +203,7 @@ class SV extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
               image: AssetImage('assets/guide/ditaile.png'),
               // 배경 이미지
             ),
@@ -220,7 +220,7 @@ class SV extends StatelessWidget {
                     child: Column(children: [
                       SizedBox(
                         width: appheight * 0.15,
-                        height: appheight * 0.15,
+                        height: appheight * 0.1,
                       ),
                       Card(
                         shape: RoundedRectangleBorder(
@@ -241,7 +241,7 @@ class SV extends StatelessWidget {
                       ),
                       SizedBox(
                         width: appheight * 0.03,
-                        height: appheight * 0.015,
+                        height: appheight * 0.03,
                       ),
                       Card(
                         shape: RoundedRectangleBorder(
