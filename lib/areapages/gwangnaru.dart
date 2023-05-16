@@ -73,7 +73,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                     children: <Widget>[
                       Text(
                         "주차정보",
-                        style: TextStyle(fontSize: 40),
+                        style: TextStyle(fontSize: 30),
                       ),
                     ],
                   ),
@@ -115,15 +115,16 @@ class _GwangNaRu extends State<GwangNaRu> {
                                           alignment: Alignment.centerLeft,
                                           child: Text(
                                             "${snapshot.data[contentid]["infotext2"][i]["name"]}  $data2/$data3",
-                                            style: TextStyle(fontSize: 30),
+                                            style: TextStyle(fontSize: 25),
                                           ),
                                         ),
                                         Container(
                                           alignment: Alignment.centerLeft,
-                                          padding: EdgeInsets.only(left: 10),
+                                          padding:
+                                              EdgeInsets.only(left: 10, top: 5),
                                           child: Text(
                                             "주소 : ${snapshot.data[contentid]["infotext2"][i]["addr"]}",
-                                            style: TextStyle(fontSize: 20),
+                                            style: TextStyle(fontSize: 15),
                                           ),
                                         ),
                                         Container(
@@ -132,7 +133,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                                               left: 10, bottom: 20),
                                           child: Text(
                                             "요금 : ${snapshot.data[contentid]["infotext2"][i]["price"]}",
-                                            style: TextStyle(fontSize: 20),
+                                            style: TextStyle(fontSize: 15),
                                           ),
                                         ),
                                       ],
@@ -155,7 +156,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                     TextButton(
                       child: Text(
                         "확인",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 15),
                       ),
                       onPressed: () {
                         Navigator.pop(context);
@@ -181,7 +182,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                     children: <Widget>[
                       Text(
                         "상세정보",
-                        style: TextStyle(fontSize: 40),
+                        style: TextStyle(fontSize: 30),
                       ),
                     ],
                   ),
@@ -201,7 +202,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                                 padding: EdgeInsets.only(bottom: 20),
                                 child: Text(
                                   overview,
-                                  style: TextStyle(fontSize: 20),
+                                  style: TextStyle(fontSize: 17),
                                 ))
                           ],
                         ),
@@ -214,7 +215,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                     TextButton(
                       child: Text(
                         "확인",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 15),
                       ),
                       onPressed: () {
                         Navigator.pop(context);
@@ -242,10 +243,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                     padding: EdgeInsets.only(top: 10),
                     child: Text(
                       '한강은 지금',
-                      style: TextStyle(
-                          fontFamily: 'EastSeaDokdo',
-                          fontSize: 40,
-                          color: Colors.black),
+                      style: TextStyle(fontSize: 25, color: Colors.black),
                     ),
                   ),
                 ],
@@ -319,16 +317,17 @@ class _GwangNaRu extends State<GwangNaRu> {
                                   child: Text(
                                     "대한민국",
                                     style: TextStyle(
-                                        fontSize: 20, color: Colors.black),
+                                        fontSize: 15, color: Colors.black),
                                   ),
                                 ),
                                 Container(
                                   alignment: Alignment.topLeft,
-                                  padding: EdgeInsets.only(left: 20, right: 50),
+                                  padding: EdgeInsets.only(
+                                      left: 20, right: 50, bottom: 7),
                                   child: Text(
                                     "${widget.areaInfo.areaName} 한강공원",
                                     style: TextStyle(
-                                        fontSize: 40,
+                                        fontSize: 35,
                                         color:
                                             Color.fromARGB(255, 168, 147, 255)),
                                   ),
@@ -350,16 +349,16 @@ class _GwangNaRu extends State<GwangNaRu> {
                                               child: RichText(
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: appheight > 820
-                                                ? 5
+                                                ? 6
                                                 : appheight > 700
-                                                    ? 4
-                                                    : 3,
+                                                    ? 5
+                                                    : 4,
                                             text: TextSpan(
                                               text: snapshot.data[contentid]
                                                   ['overviw'],
                                               style: TextStyle(
-                                                  fontSize: appwidth * 0.05,
-                                                  fontFamily: 'EastSeaDokdo',
+                                                  fontSize: appwidth * 0.04,
+                                                  fontFamily: 'KCC-Chassam',
                                                   color: Colors.black),
                                             ),
                                           )),
@@ -394,7 +393,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                                                 child: Text(
                                                   '주차 정보',
                                                   style: TextStyle(
-                                                      fontSize: appwidth * 0.06,
+                                                      fontSize: appwidth * 0.04,
                                                       color: Colors.black),
                                                 ),
                                               ),
@@ -426,8 +425,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                                                 child: Text(
                                                   '상세 정보',
                                                   style: TextStyle(
-                                                      fontSize:
-                                                          appwidth * 0.055,
+                                                      fontSize: appwidth * 0.04,
                                                       color: Colors.black),
                                                 ),
                                               ),
@@ -467,7 +465,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                   padding: EdgeInsets.only(left: 20, top: 30),
                   child: Text(
                     "시설 현황",
-                    style: TextStyle(fontSize: appheight * 0.04),
+                    style: TextStyle(fontSize: appheight * 0.035),
                   ),
                 ),
                 Container(
@@ -497,11 +495,11 @@ class _GwangNaRu extends State<GwangNaRu> {
                                 alignment: Alignment.topCenter,
                                 child: Text(
                                   "운동시설 : ",
-                                  style: TextStyle(fontSize: appwidth * 0.05),
+                                  style: TextStyle(fontSize: appwidth * 0.04),
                                 ),
                               ),
                               Container(
-                                  width: appwidth * 0.5,
+                                  width: appwidth * 0.55,
                                   alignment: Alignment.topLeft,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -514,8 +512,8 @@ class _GwangNaRu extends State<GwangNaRu> {
                                           text:
                                               "${snapshot.data[widget.areaInfo.contentid]["infotext"]["gym"]}",
                                           style: TextStyle(
-                                              fontSize: appwidth * 0.05,
-                                              fontFamily: 'EastSeaDokdo',
+                                              fontSize: appwidth * 0.04,
+                                              fontFamily: 'KCC-Chassam',
                                               color: Colors.black),
                                         ),
                                       )),
@@ -534,11 +532,11 @@ class _GwangNaRu extends State<GwangNaRu> {
                                 alignment: Alignment.topCenter,
                                 child: Text(
                                   "편의시설 : ",
-                                  style: TextStyle(fontSize: appwidth * 0.05),
+                                  style: TextStyle(fontSize: appwidth * 0.04),
                                 ),
                               ),
                               Container(
-                                  width: appwidth * 0.5,
+                                  width: appwidth * 0.55,
                                   alignment: Alignment.topLeft,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -551,8 +549,8 @@ class _GwangNaRu extends State<GwangNaRu> {
                                           text:
                                               "${snapshot.data[widget.areaInfo.contentid]["infotext"]["facilities"]}",
                                           style: TextStyle(
-                                              fontSize: appwidth * 0.05,
-                                              fontFamily: 'EastSeaDokdo',
+                                              fontSize: appwidth * 0.04,
+                                              fontFamily: 'KCC-Chassam',
                                               color: Colors.black),
                                         ),
                                       )),
@@ -571,11 +569,11 @@ class _GwangNaRu extends State<GwangNaRu> {
                                 alignment: Alignment.topCenter,
                                 child: Text(
                                   "기타 : ",
-                                  style: TextStyle(fontSize: appwidth * 0.05),
+                                  style: TextStyle(fontSize: appwidth * 0.04),
                                 ),
                               ),
                               Container(
-                                  width: appwidth * 0.5,
+                                  width: appwidth * 0.6,
                                   alignment: Alignment.topLeft,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -588,8 +586,8 @@ class _GwangNaRu extends State<GwangNaRu> {
                                           text:
                                               "${snapshot.data[widget.areaInfo.contentid]["infotext"]["else"]}",
                                           style: TextStyle(
-                                              fontSize: appwidth * 0.05,
-                                              fontFamily: 'EastSeaDokdo',
+                                              fontSize: appwidth * 0.04,
+                                              fontFamily: 'KCC-Chassam',
                                               color: Colors.black),
                                         ),
                                       )),
@@ -598,9 +596,6 @@ class _GwangNaRu extends State<GwangNaRu> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        )
                       ]),
                     )),
               ],

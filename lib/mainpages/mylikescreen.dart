@@ -189,8 +189,8 @@ class _MyLikeScreenState extends State<MyLikeScreen> {
                   child: Text(
                     '한강은 지금',
                     style: TextStyle(
-                        fontFamily: 'EastSeaDokdo',
-                        fontSize: 40,
+                        fontFamily: 'KCC-Chassam',
+                        fontSize: 25,
                         color: Colors.black),
                   ),
                 ),

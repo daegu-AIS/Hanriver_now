@@ -11,14 +11,6 @@ class TopWidget extends StatefulWidget {
 }
 
 class _TopWidget extends State<TopWidget> {
-  Future<DateTime> DateTimeNow() async {
-    DateTime _myTime;
-    _myTime = await NTP.now();
-    _myTime = _myTime.toUtc().add(Duration(hours: 9));
-
-    return _myTime;
-  }
-
   @override
   Widget build(BuildContext context) {
     final appheight = MediaQuery.of(context).size.height;
@@ -67,7 +59,7 @@ class _TopWidget extends State<TopWidget> {
                             child: Text(
                               '서울은 지금',
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: appwidth * 0.03,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
                             ),
@@ -75,13 +67,14 @@ class _TopWidget extends State<TopWidget> {
                           Container(
                             width: appwidth * 0.3,
                             // height: appheight * 0.09,
-                            padding: EdgeInsets.only(left: appwidth * 0.03),
-                            alignment: Alignment.topLeft,
+                            padding: EdgeInsets.only(
+                                left: appwidth * 0.03, top: appheight * 0.01),
+                            alignment: Alignment.centerLeft,
                             // color: Colors.red,
                             child: Text(
                               '${weatherdata["TEMP"]}℃',
                               style: TextStyle(
-                                  fontSize: 35,
+                                  fontSize: appwidth * 0.08,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
                             ),
@@ -91,39 +84,41 @@ class _TopWidget extends State<TopWidget> {
                       Column(
                         children: [
                           Container(
-                            width: appwidth * 0.3,
+                            width: appwidth * 0.5,
                             // color: Colors.red,
                             padding: EdgeInsets.only(
                                 top: appheight * 0.01, right: appwidth * 0.03),
                             alignment: Alignment.centerRight,
                             child: Icon(Icons.sunny,
-                                color: Colors.white, size: 20),
+                                color: Colors.white, size: appwidth * 0.045),
                           ),
                           Container(
-                            width: appwidth * 0.3,
+                            width: appwidth * 0.5,
                             // height: appheight * 0.09,
-                            padding: EdgeInsets.only(right: appwidth * 0.03),
+                            padding: EdgeInsets.only(
+                                right: appwidth * 0.03, top: appheight * 0.005),
                             alignment: Alignment.topRight,
                             // color: Colors.red,
                             child: Text(
                               '${fcstdata["SKY_STTS"]}',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: appwidth * 0.04,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
                             ),
                           ),
                           Container(
-                            width: appwidth * 0.3,
+                            width: appwidth * 0.5,
                             // height: appheight * 0.09,
-                            padding: EdgeInsets.only(right: appwidth * 0.03),
+                            padding: EdgeInsets.only(
+                                right: appwidth * 0.03, top: appheight * 0.005),
                             alignment: Alignment.topRight,
                             // color: Colors.red,
                             child: Text(
                               '최고 ${weatherdata["MAX_TEMP"]}℃ 최저 ${weatherdata["MIN_TEMP"]}℃',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: appwidth * 0.035,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
@@ -154,25 +149,29 @@ class _TopWidget extends State<TopWidget> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: appwidth * 0.275,
+                                      width: appwidth * 0.25,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
                                       child: Text(
                                         "자외선 지수",
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
+                                          color: Colors.white,
+                                          fontSize: appwidth * 0.04,
+                                        ),
                                       ),
                                     ),
                                     Container(
-                                      width: appwidth * 0.15,
+                                      width: appwidth * 0.175,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
                                       child: Text(
-                                        "${weatherdata["UV_INDEX"]}",
+                                        "${weatherdata["UV_INDEX"]} (${weatherdata["UV_INDEX_LVL"]})",
                                         style: TextStyle(
-                                            color: Colors.yellow, fontSize: 20),
+                                          color: Colors.yellow,
+                                          fontSize: appwidth * 0.035,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -180,26 +179,27 @@ class _TopWidget extends State<TopWidget> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: appwidth * 0.275,
+                                      width: appwidth * 0.25,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
-                                      child: Text(
-                                        "미세먼지",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
-                                      ),
+                                      child: Text("미세먼지",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: appwidth * 0.04,
+                                          )),
                                     ),
                                     Container(
-                                      width: appwidth * 0.15,
+                                      width: appwidth * 0.175,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
                                       child: Text(
-                                        "${weatherdata["PM10_INDEX"]}",
-                                        style: TextStyle(
-                                            color: Colors.yellow, fontSize: 20),
-                                      ),
+                                          "${weatherdata["PM10_INDEX"]} (${weatherdata["PM10"]})",
+                                          style: TextStyle(
+                                            color: Colors.yellow,
+                                            fontSize: appwidth * 0.035,
+                                          )),
                                     ),
                                   ],
                                 ),
@@ -210,52 +210,52 @@ class _TopWidget extends State<TopWidget> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: appwidth * 0.275,
+                                      width: appwidth * 0.25,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
-                                      child: Text(
-                                        "강수량",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
-                                      ),
+                                      child: Text("강수량",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: appwidth * 0.04,
+                                          )),
                                     ),
                                     Container(
-                                      width: appwidth * 0.15,
+                                      width: appwidth * 0.175,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
                                       child: Text(
-                                        "${weatherdata["PRECIPITATION"]}",
-                                        style: TextStyle(
-                                            color: Colors.yellow, fontSize: 20),
-                                      ),
+                                          "${weatherdata["PRECIPITATION"]}",
+                                          style: TextStyle(
+                                            color: Colors.yellow,
+                                            fontSize: appwidth * 0.035,
+                                          )),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   children: [
                                     Container(
-                                      width: appwidth * 0.275,
+                                      width: appwidth * 0.25,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
-                                      child: Text(
-                                        "초미세먼지",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
-                                      ),
+                                      child: Text("초미세먼지",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: appwidth * 0.04)),
                                     ),
                                     Container(
-                                      width: appwidth * 0.15,
+                                      width: appwidth * 0.175,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
                                       child: Text(
-                                        "${weatherdata["PM25_INDEX"]}",
-                                        style: TextStyle(
-                                            color: Colors.yellow, fontSize: 20),
-                                      ),
+                                          "${weatherdata["PM25_INDEX"]} (${weatherdata["PM25"]})",
+                                          style: TextStyle(
+                                              color: Colors.yellow,
+                                              fontSize: appwidth * 0.035)),
                                     ),
                                   ],
                                 ),
@@ -297,7 +297,7 @@ class _TopWidget extends State<TopWidget> {
                             child: Text(
                               '서울은 지금',
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: appwidth * 0.03,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
                             ),
@@ -361,18 +361,19 @@ class _TopWidget extends State<TopWidget> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: appwidth * 0.275,
+                                      width: appwidth * 0.225,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
                                       child: Text(
                                         "자외선 지수",
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
+                                            color: Colors.white,
+                                            fontSize: appwidth * 0.04),
                                       ),
                                     ),
                                     Container(
-                                      width: appwidth * 0.15,
+                                      width: appwidth * 0.175,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
@@ -382,18 +383,19 @@ class _TopWidget extends State<TopWidget> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: appwidth * 0.275,
+                                      width: appwidth * 0.25,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
                                       child: Text(
                                         "미세먼지",
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
+                                            color: Colors.white,
+                                            fontSize: appwidth * 0.04),
                                       ),
                                     ),
                                     Container(
-                                      width: appwidth * 0.15,
+                                      width: appwidth * 0.175,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
@@ -407,18 +409,19 @@ class _TopWidget extends State<TopWidget> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: appwidth * 0.275,
+                                      width: appwidth * 0.25,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
                                       child: Text(
                                         "강수량",
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
+                                            color: Colors.white,
+                                            fontSize: appwidth * 0.04),
                                       ),
                                     ),
                                     Container(
-                                      width: appwidth * 0.15,
+                                      width: appwidth * 0.175,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
@@ -428,18 +431,19 @@ class _TopWidget extends State<TopWidget> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: appwidth * 0.275,
+                                      width: appwidth * 0.25,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
                                       child: Text(
                                         "초미세먼지",
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
+                                            color: Colors.white,
+                                            fontSize: appwidth * 0.04),
                                       ),
                                     ),
                                     Container(
-                                      width: appwidth * 0.15,
+                                      width: appwidth * 0.175,
                                       height: appheight * 0.035,
                                       alignment: Alignment.center,
                                       // color: Colors.red,
@@ -456,21 +460,5 @@ class _TopWidget extends State<TopWidget> {
         }
       },
     );
-    // FutureBuilder(
-    //   future: http.get(Uri.parse('$apiUrl남산공원')),
-    //   builder: ((context, snapshot) {
-    //     if (snapshot.hasData) {
-    //       final getXmlData = snapshot.data!.body;
-    //       final xml = Xml2Json()..parse(getXmlData);
-    //       final jsonData = xml.toParker();
-    //       var data = jsonDecode(jsonData);
-    //       return Text(data["SeoulRtd.citydata"]["CITYDATA"]["WEATHER_STTS"]
-    //               ["WEATHER_STTS"]["WEATHER_TIME"]
-    //           .toString());
-    //     } else {
-    //       return Text('Loading...');
-    //     }
-    //   }),
-    // );
   }
 }

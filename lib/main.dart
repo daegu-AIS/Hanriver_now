@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       theme: ThemeData(
-        fontFamily: 'EastSeaDokdo',
+        fontFamily: 'KCC-Chassam',
         primaryColor: Color.fromARGB(255, 249, 248, 253),
         scaffoldBackgroundColor: Color.fromARGB(255, 249, 248, 253),
       ),

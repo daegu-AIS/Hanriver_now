@@ -128,10 +128,7 @@ class _ShowGridScreen extends State<ShowGridScreen> {
                 padding: EdgeInsets.only(top: 10),
                 child: Text(
                   '한강은 지금',
-                  style: TextStyle(
-                      fontFamily: 'EastSeaDokdo',
-                      fontSize: 40,
-                      color: Colors.black),
+                  style: TextStyle(fontSize: 25, color: Colors.black),
                 ),
               ),
             ],

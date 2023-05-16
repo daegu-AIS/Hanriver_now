@@ -32,10 +32,7 @@ class _ServiceInfo extends State<ServiceInfo> {
               padding: EdgeInsets.only(top: 10),
               child: Text(
                 '서비스',
-                style: TextStyle(
-                    fontFamily: 'EastSeaDokdo',
-                    fontSize: 40,
-                    color: Colors.black),
+                style: TextStyle(fontSize: 25, color: Colors.black),
               ),
             ),
           ],
@@ -63,10 +60,7 @@ class SV extends StatelessWidget {
               padding: EdgeInsets.only(top: 40),
               child: Text(
                 'App Guide',
-                style: TextStyle(
-                    fontFamily: 'EastSeaDokdo',
-                    fontSize: 70,
-                    color: Colors.black),
+                style: TextStyle(fontSize: 70, color: Colors.black),
               ),
             )),
             Container(
@@ -74,10 +68,7 @@ class SV extends StatelessWidget {
               padding: EdgeInsets.only(top: 300),
               child: Text(
                 '옆으로 슬라이드',
-                style: TextStyle(
-                    fontFamily: 'EastSeaDokdo',
-                    fontSize: 30,
-                    color: Colors.black),
+                style: TextStyle(fontSize: 30, color: Colors.black),
               ),
             )),
             Container(
@@ -104,10 +95,7 @@ class SV extends StatelessWidget {
                         top: 50, bottom: 50, left: 50, right: 50),
                     child: Text(
                       '날씨 정보 제공',
-                      style: TextStyle(
-                          fontFamily: 'EastSeaDokdo',
-                          fontSize: 30,
-                          color: Colors.black),
+                      style: TextStyle(fontSize: 30, color: Colors.black),
                     ),
                   )),
               Container(
@@ -126,10 +114,7 @@ class SV extends StatelessWidget {
                               top: 10, bottom: 10, left: 10, right: 10),
                           child: Text(
                             '클릭시 상세정보 \n  페이지로 이동',
-                            style: TextStyle(
-                                fontFamily: 'EastSeaDokdo',
-                                fontSize: 30,
-                                color: Colors.black),
+                            style: TextStyle(fontSize: 30, color: Colors.black),
                           ),
                         ))),
               ),
