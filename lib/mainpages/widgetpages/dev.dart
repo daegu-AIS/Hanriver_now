@@ -29,7 +29,7 @@ class _Developer extends State<Developer> {
               height: 50,
             ),
             Container(
-              padding: EdgeInsets.only(top: 10),
+              padding: EdgeInsets.only(top: 15),
               child: Text(
                 '개발자',
                 style: TextStyle(fontSize: 25, color: Colors.black),

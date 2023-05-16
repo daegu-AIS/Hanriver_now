@@ -33,7 +33,7 @@ class _ServiceInfo extends State<ServiceInfo> {
               height: 50,
             ),
             Container(
-              padding: EdgeInsets.only(top: 10),
+              padding: EdgeInsets.only(top: 15),
               child: Text(
                 '서비스',
                 style: TextStyle(fontSize: 25, color: Colors.black),
@@ -82,8 +82,12 @@ class SV extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage('assets/guide/home.png'), // 배경 이미지
+              fit: BoxFit.contain,
+              image: AssetImage(
+                'assets/guide/home.png',
+              ),
+
+              // 배경 이미지
             ),
           ),
           child: Column(
@@ -203,7 +207,7 @@ class SV extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              fit: BoxFit.cover,
+              fit: BoxFit.fitHeight,
               image: AssetImage('assets/guide/ditaile.png'),
               // 배경 이미지
             ),

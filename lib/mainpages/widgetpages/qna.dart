@@ -29,7 +29,7 @@ class _QnA extends State<QnA> {
               height: 50,
             ),
             Container(
-              padding: EdgeInsets.only(top: 10),
+              padding: EdgeInsets.only(top: 15),
               child: Text(
                 'QnA',
                 style: TextStyle(fontSize: 25, color: Colors.black),

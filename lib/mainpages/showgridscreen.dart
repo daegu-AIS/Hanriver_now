@@ -125,7 +125,7 @@ class _ShowGridScreen extends State<ShowGridScreen> {
                 height: 50,
               ),
               Container(
-                padding: EdgeInsets.only(top: 10),
+                padding: EdgeInsets.only(top: 15),
                 child: Text(
                   '한강은 지금',
                   style: TextStyle(fontSize: 25, color: Colors.black),
@@ -148,10 +148,15 @@ class _ShowGridScreen extends State<ShowGridScreen> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        SizedBox(height: 20),
                         page("서비스 정보", ServiceInfo(), appwidth, appheight),
+                        SizedBox(height: 40),
                         page("QnA", QnA(), appwidth, appheight),
+                        SizedBox(height: 40),
                         page("개발자 정보", Developer(), appwidth, appheight),
-                        // page("오픈소스 라이선스", OpenSource(), appwidth, appheight),
+                        SizedBox(height: 40),
+                        page("오픈소스 라이선스", OpenSource(), appwidth, appheight),
+                        SizedBox(height: 40),
                         Container(
                           padding:
                               EdgeInsets.only(left: appwidth * 0.1, top: 20),
@@ -209,10 +214,10 @@ class _ShowGridScreen extends State<ShowGridScreen> {
                             width: appwidth * 0.85,
                             height: 100,
                             // color: Color.fromARGB(255, 191, 188, 202),
-                            child: Icon(
-                              Icons.flutter_dash,
-                              size: 70,
-                              color: Colors.black,
+                            padding: EdgeInsets.only(left: 20, top: 20),
+                            child: Text(
+                              "1.0.0 version",
+                              style: TextStyle(fontSize: 15),
                             ),
                           ),
                         ),

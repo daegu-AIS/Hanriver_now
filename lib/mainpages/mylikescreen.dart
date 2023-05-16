@@ -185,7 +185,7 @@ class _MyLikeScreenState extends State<MyLikeScreen> {
                   height: 50,
                 ),
                 Container(
-                  padding: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.only(top: 15),
                   child: Text(
                     '한강은 지금',
                     style: TextStyle(

@@ -52,7 +52,6 @@ class _GwangNaRu extends State<GwangNaRu> {
             // }
             return titleElement;
           } else {
-            print("error");
             return [];
           }
         }
@@ -465,11 +464,13 @@ class _GwangNaRu extends State<GwangNaRu> {
                   padding: EdgeInsets.only(left: 20, top: 30),
                   child: Text(
                     "시설 현황",
-                    style: TextStyle(fontSize: appheight * 0.035),
+                    style: TextStyle(
+                        fontSize: appheight * 0.035,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
-                    padding: EdgeInsets.only(left: 40, top: 5, right: 40),
+                    padding: EdgeInsets.only(left: 40, top: 20, right: 40),
                     child: Container(
                       decoration: BoxDecoration(
                         color: Color.fromARGB(255, 255, 255, 255),
@@ -501,6 +502,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                               Container(
                                   width: appwidth * 0.55,
                                   alignment: Alignment.topLeft,
+                                  padding: EdgeInsets.only(right: 20),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
@@ -538,6 +540,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                               Container(
                                   width: appwidth * 0.55,
                                   alignment: Alignment.topLeft,
+                                  padding: EdgeInsets.only(right: 20),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
@@ -575,6 +578,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                               Container(
                                   width: appwidth * 0.6,
                                   alignment: Alignment.topLeft,
+                                  padding: EdgeInsets.only(right: 20),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [

@@ -43,8 +43,8 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   page_view_dot_indicator: ^2.1.0
   ntp: ^2.0.0
-  # flutter_oss_licenses: ^2.0.1
-  # url_launcher: ^6.1.11
+  flutter_oss_licenses: ^2.0.1
+
 
 
   
@@ -100,9 +100,7 @@ flutter:
     # - family : Sunflower
     #   fonts : 
     #     - asset : assets/fonts/Sunflower-bold.ttf
-    - family : EastSeaDokdo
-      fonts : 
-        - asset : assets/font/EastSeaDokdo-Regular.ttf
+
     - family : KCC-Chassam
       fonts : 
         - asset : assets/font/KCC-Chassam.ttf

@@ -17,20 +17,6 @@ class BigWidget extends StatefulWidget {
   _BigWidget createState() => _BigWidget();
 }
 
-class ReadJsonFile {
-  static Future<Map> readJsonData({required String path}) async {
-    // read json file
-    final jsondata = await root_bundle.rootBundle.loadString(path);
-
-    // decode json data as list
-    final list = json.decode(jsondata) as Map;
-
-    // map json and initialize
-    // using DataModel
-    return list;
-  }
-}
-
 class _BigWidget extends State<BigWidget> {
   final String apiUrl =
       'http://openapi.seoul.go.kr:8088/776a6b515877686438366d4b4b5847/xml/citydata/1/5/';
