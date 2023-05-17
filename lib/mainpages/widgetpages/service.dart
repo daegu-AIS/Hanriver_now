@@ -299,8 +299,13 @@ class SV extends StatelessWidget {
                         right: appheight * 0.05),
                     child: FloatingActionButton(
                       onPressed: () {
-                        Navigator.pop(context);
-                        Navigator.pop(context);
+                        // Navigator.pop(context);
+                        // Navigator.pop(context);
+                        Navigator.push(context, PageRouteBuilder(
+                          pageBuilder: (context, a, b) {
+                            return LandingPage();
+                          },
+                        ));
                       },
                       child: CircleAvatar(
                           radius: 40,
