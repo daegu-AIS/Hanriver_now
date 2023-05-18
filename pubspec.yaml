@@ -44,7 +44,7 @@ dependencies:
   page_view_dot_indicator: ^2.1.0
   ntp: ^2.0.0
   flutter_oss_licenses: ^2.0.1
-
+  async: ^2.3.0
 
 
   

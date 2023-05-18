@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hanriver_now/mainpages/mylikescreen.dart';
@@ -18,6 +19,7 @@ class BigWidget extends StatefulWidget {
 }
 
 class _BigWidget extends State<BigWidget> {
+  final AsyncMemoizer _memoizer = AsyncMemoizer();
   final String apiUrl =
       'http://openapi.seoul.go.kr:8088/776a6b515877686438366d4b4b5847/xml/citydata/1/5/';
   Widget Traffic(String traffic, double appwidth) {
@@ -51,10 +53,13 @@ class _BigWidget extends State<BigWidget> {
   @override
   Widget build(BuildContext context) {
     Future<dynamic> readJson() async {
-      final String response =
-          await rootBundle.loadString('assets/json/detail.json');
-      final data = await json.decode(response);
-      return data[0];
+      return _memoizer.runOnce(() async {
+        final String response =
+            await rootBundle.loadString('assets/json/detail.json');
+        final data = await json.decode(response);
+
+        return data[0];
+      });
     }
 
     final appheight = MediaQuery.of(context).size.height;

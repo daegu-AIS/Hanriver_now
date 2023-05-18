@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color.fromARGB(255, 249, 248, 253),
         scaffoldBackgroundColor: Color.fromARGB(255, 249, 248, 253),
       ),
-      home: LandingPage(),
+      home: LandingPage(2),
     );
   }
 }

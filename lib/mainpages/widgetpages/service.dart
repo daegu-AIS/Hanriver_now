@@ -303,7 +303,7 @@ class SV extends StatelessWidget {
                         // Navigator.pop(context);
                         Navigator.push(context, PageRouteBuilder(
                           pageBuilder: (context, a, b) {
-                            return LandingPage();
+                            return LandingPage(1);
                           },
                         ));
                       },
