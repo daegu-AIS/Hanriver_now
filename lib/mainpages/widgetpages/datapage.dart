@@ -18,7 +18,7 @@ class _DataPage extends State<DataPage> {
         Container(
           padding: EdgeInsets.only(right: 10),
           child: TextButton(
-            onPressed: () => _launchUrl("hi"),
+            onPressed: () => _launchUrl(url),
             child: Text("바로가기"),
           ),
         ),
@@ -27,9 +27,10 @@ class _DataPage extends State<DataPage> {
   }
 
   Future<void> _launchUrl(String url) async {
-    final Uri _url = Uri.parse(url);
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
+    print(url);
+    final Uri Url = Uri.parse(url);
+    if (!await launchUrl(Url)) {
+      throw Exception('Could not launch $Url');
     }
   }
 
@@ -79,12 +80,12 @@ class _DataPage extends State<DataPage> {
             height: 20,
           ),
           Datafunc("한국관광공사 국문 관광정보",
-              "https://www.data.go.kr/iim/api/selectAPIAcountView.do"),
+              "https://www.data.go.kr/data/15101578/openapi.do"),
           SizedBox(
             height: 20,
           ),
-          Datafunc("기상청 단기예보 조회",
-              "https://www.data.go.kr/iim/api/selectAPIAcountView.do"),
+          Datafunc(
+              "기상청 단기예보 조회", "https://www.data.go.kr/data/15084084/openapi.do"),
           SizedBox(
             height: 20,
           ),

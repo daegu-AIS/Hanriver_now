@@ -113,8 +113,17 @@ class _GwangNaRu extends State<GwangNaRu> {
                                         Container(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            "${snapshot.data[contentid]["infotext2"][i]["name"]}  $data2/$data3",
+                                            "${snapshot.data[contentid]["infotext2"][i]["name"]}",
                                             style: TextStyle(fontSize: 25),
+                                          ),
+                                        ),
+                                        Container(
+                                          alignment: Alignment.centerLeft,
+                                          padding:
+                                              EdgeInsets.only(left: 10, top: 5),
+                                          child: Text(
+                                            "주차 가능 대수 : $data2",
+                                            style: TextStyle(fontSize: 15),
                                           ),
                                         ),
                                         Container(
@@ -128,10 +137,19 @@ class _GwangNaRu extends State<GwangNaRu> {
                                         ),
                                         Container(
                                           alignment: Alignment.centerLeft,
-                                          padding: EdgeInsets.only(
-                                              left: 10, bottom: 20),
+                                          padding:
+                                              EdgeInsets.only(left: 10, top: 5),
                                           child: Text(
                                             "요금 : ${snapshot.data[contentid]["infotext2"][i]["price"]}",
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        ),
+                                        Container(
+                                          alignment: Alignment.centerLeft,
+                                          padding: EdgeInsets.only(
+                                              left: 10, bottom: 20, top: 5),
+                                          child: Text(
+                                            "1일 최대 요금 : ${snapshot.data[contentid]["infotext2"][i]["max"]}",
                                             style: TextStyle(fontSize: 15),
                                           ),
                                         ),
