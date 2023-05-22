@@ -60,7 +60,7 @@ class _MyLikeScreenState extends State<MyLikeScreen> {
             title: Column(
               children: <Widget>[
                 Text(
-                  "현재 개발중입니다.",
+                  "개발중입니다.",
                   style: TextStyle(fontSize: 20),
                 ),
               ],

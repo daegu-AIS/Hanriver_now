@@ -22,28 +22,50 @@ class _BigWidget extends State<BigWidget> {
   final AsyncMemoizer _memoizer = AsyncMemoizer();
   final String apiUrl =
       'http://openapi.seoul.go.kr:8088/776a6b515877686438366d4b4b5847/xml/citydata/1/5/';
-  Widget Traffic(String traffic, double appwidth) {
+  Widget Traffic(String traffic, double appwidth, double appheight) {
     if (traffic == "여유") {
       return Text(
         traffic,
-        style: TextStyle(fontSize: appwidth * 0.45 * 0.07, color: Colors.green),
+        style: TextStyle(
+            fontSize: appwidth > appheight
+                ? 18
+                : appwidth >= 500
+                    ? 14
+                    : appwidth * 0.45 * 0.065,
+            color: Colors.green),
       );
     } else if (traffic == "약간 붐빔") {
       return Text(
         traffic,
-        style:
-            TextStyle(fontSize: appwidth * 0.45 * 0.07, color: Colors.orange),
+        style: TextStyle(
+            fontSize: appwidth > appheight
+                ? 18
+                : appwidth >= 500
+                    ? 14
+                    : appwidth * 0.45 * 0.065,
+            color: Colors.orange),
       );
     } else if (traffic == "보통") {
       return Text(
         traffic,
-        style:
-            TextStyle(fontSize: appwidth * 0.45 * 0.07, color: Colors.yellow),
+        style: TextStyle(
+            fontSize: appwidth > appheight
+                ? 18
+                : appwidth >= 500
+                    ? 14
+                    : appwidth * 0.45 * 0.065,
+            color: Colors.yellow),
       );
     } else if (traffic == "붐빔") {
       return Text(
         traffic,
-        style: TextStyle(fontSize: appwidth * 0.45 * 0.07, color: Colors.red),
+        style: TextStyle(
+            fontSize: appwidth > appheight
+                ? 18
+                : appwidth >= 500
+                    ? 14
+                    : appwidth * 0.45 * 0.065,
+            color: Colors.red),
       );
     }
 
@@ -88,13 +110,17 @@ class _BigWidget extends State<BigWidget> {
                   fit: BoxFit.fill,
                 ),
               ),
-              height: appheight * 0.24,
+              height: appwidth >= appheight ? 200 : appheight * 0.2,
+              // constraints: BoxConstraints(minHeight: 190),
+              // height: 220,
+
               width: appwidth * 0.64,
               alignment: Alignment.center,
             ),
             Positioned(
                 top: (appheight * 0.04) / 2,
-                left: appwidth - (appwidth * 0.41) - appwidth * 0.22,
+                // left: appwidth * 0.39,
+                right: 0,
                 child: InkWell(
                     splashColor: Color.fromARGB(255, 156, 137, 77),
                     onTap: () {
@@ -117,7 +143,13 @@ class _BigWidget extends State<BigWidget> {
                           ),
                         ],
                       ),
-                      height: appheight * 0.20,
+                      // height: 200,
+                      // constraints: BoxConstraints(minHeight: 170),
+                      height: appwidth >= appheight
+                          ? 180
+                          : appheight >= 730
+                              ? appheight * 0.16
+                              : appheight * 0.18,
                       width: appwidth * 0.5,
                       alignment: Alignment.center,
                       child: Column(
@@ -129,7 +161,7 @@ class _BigWidget extends State<BigWidget> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Container(
+                                SizedBox(
                                   // color: Colors.red,
                                   width: appwidth * 0.45 * 0.31,
                                   height: appheight * 0.158 * 0.01,
@@ -137,16 +169,20 @@ class _BigWidget extends State<BigWidget> {
                                 Row(
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.only(
-                                          left: appwidth * 0.05,
-                                          top: appheight * 0.008),
-                                      width: appwidth * 0.45,
-                                      height: appheight * 0.158 * 0.3,
-                                      // color: Colors.red,
+                                      padding:
+                                          EdgeInsets.only(left: 15, top: 5),
                                       child: Text(
                                         "${widget.areaInfo.areaName} 한강 공원",
                                         style: TextStyle(
-                                            fontSize: appwidth * 0.45 * 0.12),
+                                          // fontSize: appwidth > appheight
+                                          //     ? 30
+                                          //     : appwidth * 0.45 * 0.1,
+                                          fontSize: appwidth > appheight
+                                              ? 30
+                                              : appwidth >= 500
+                                                  ? 24
+                                                  : appwidth * 0.45 * 0.1,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -162,7 +198,15 @@ class _BigWidget extends State<BigWidget> {
                                     return Text(
                                       "  ${snapshot.data[widget.areaInfo.contentid]["addr"]}",
                                       style: TextStyle(
-                                          fontSize: appwidth * 0.45 * 0.07),
+                                        // fontSize: appwidth > appheight
+                                        //     ? 18
+                                        //     : appwidth * 0.025
+                                        fontSize: appwidth > appheight
+                                            ? 18
+                                            : appwidth >= 500
+                                                ? 16
+                                                : appwidth * 0.025,
+                                      ),
                                     );
                                   } else {
                                     return CircularProgressIndicator();
@@ -171,12 +215,11 @@ class _BigWidget extends State<BigWidget> {
                               ),
                             ),
                             SizedBox(
-                              width: appwidth * 0.45 * 0.95,
-                              height: appheight * 0.158 * 0.15,
+                              // width: appwidth * 0.45 * 0.95,
+                              height: 10,
                             ),
                             SizedBox(
                               width: appwidth * 0.45,
-                              height: appheight * 0.158 * 0.15,
                               child: Row(
                                 children: [
                                   SizedBox(
@@ -184,7 +227,12 @@ class _BigWidget extends State<BigWidget> {
                                   ),
                                   Icon(
                                     Icons.circle,
-                                    size: appwidth * 0.45 * 0.065,
+                                    size: appwidth > appheight
+                                        ? 22
+                                        : appwidth >= 500
+                                            ? 14
+                                            : appwidth * 0.45 * 0.065,
+                                    // size: appwidth * 0.45 * 0.065,
                                     color: Color.fromARGB(255, 211, 200, 255),
                                   ),
                                   Container(
@@ -196,8 +244,14 @@ class _BigWidget extends State<BigWidget> {
                                           return Text(
                                               "  안내센터 : ${snapshot.data[widget.areaInfo.contentid]["tel"]}",
                                               style: TextStyle(
-                                                  fontSize:
-                                                      appwidth * 0.45 * 0.069));
+                                                fontSize: appwidth > appheight
+                                                    ? 18
+                                                    : appwidth >= 500
+                                                        ? 14
+                                                        : appwidth *
+                                                            0.45 *
+                                                            0.065,
+                                              ));
                                         } else {
                                           return CircularProgressIndicator();
                                         }
@@ -209,7 +263,7 @@ class _BigWidget extends State<BigWidget> {
                             ),
                             SizedBox(
                               width: appwidth * 0.45,
-                              height: appheight * 0.158 * 0.15,
+                              // height: appheight * 0.158 * 0.15,
                               child: Row(
                                 children: [
                                   SizedBox(
@@ -217,7 +271,11 @@ class _BigWidget extends State<BigWidget> {
                                   ),
                                   Icon(
                                     Icons.circle,
-                                    size: appwidth * 0.45 * 0.065,
+                                    size: appwidth > appheight
+                                        ? 22
+                                        : appwidth >= 500
+                                            ? 14
+                                            : appwidth * 0.45 * 0.065,
                                     color: Color.fromARGB(255, 211, 200, 255),
                                   ),
                                   Container(
@@ -229,8 +287,14 @@ class _BigWidget extends State<BigWidget> {
                                           return Text(
                                               "  이용요금 : ${snapshot.data[widget.areaInfo.contentid]["infotext3"]}",
                                               style: TextStyle(
-                                                  fontSize:
-                                                      appwidth * 0.45 * 0.07));
+                                                fontSize: appwidth > appheight
+                                                    ? 18
+                                                    : appwidth >= 500
+                                                        ? 14
+                                                        : appwidth *
+                                                            0.45 *
+                                                            0.065,
+                                              ));
                                         } else {
                                           return CircularProgressIndicator();
                                         }
@@ -242,14 +306,18 @@ class _BigWidget extends State<BigWidget> {
                             ),
                             SizedBox(
                               width: appwidth * 0.45,
-                              height: appheight * 0.158 * 0.15,
+                              // height: appheight * 0.158 * 0.15,
                               child: Row(children: [
                                 SizedBox(
                                   width: appwidth * 0.45 * 0.04,
                                 ),
                                 Icon(
                                   Icons.circle,
-                                  size: appwidth * 0.45 * 0.065,
+                                  size: appwidth > appheight
+                                      ? 22
+                                      : appwidth >= 500
+                                          ? 14
+                                          : appwidth * 0.45 * 0.065,
                                   color: Color.fromARGB(255, 211, 200, 255),
                                 ),
                                 Container(
@@ -272,9 +340,14 @@ class _BigWidget extends State<BigWidget> {
                                                   "해당하는 데이터가 없습니다") {
                                                 return Text("  실시간 혼잡도 : 지원안함",
                                                     style: TextStyle(
-                                                        fontSize: appwidth *
-                                                            0.45 *
-                                                            0.07));
+                                                        fontSize: appwidth >
+                                                                appheight
+                                                            ? 18
+                                                            : appwidth >= 500
+                                                                ? 14
+                                                                : appwidth *
+                                                                    0.45 *
+                                                                    0.065));
                                               }
                                             } catch (e) {
                                               return Row(
@@ -282,9 +355,14 @@ class _BigWidget extends State<BigWidget> {
                                                   Text(
                                                     "  실시간 혼잡도 : ",
                                                     style: TextStyle(
-                                                      fontSize: appwidth *
-                                                          0.45 *
-                                                          0.07,
+                                                      fontSize:
+                                                          appwidth > appheight
+                                                              ? 18
+                                                              : appwidth >= 500
+                                                                  ? 14
+                                                                  : appwidth *
+                                                                      0.45 *
+                                                                      0.065,
                                                     ),
                                                   ),
                                                   Traffic(
@@ -295,17 +373,32 @@ class _BigWidget extends State<BigWidget> {
                                                               [
                                                               "LIVE_PPLTN_STTS"]
                                                           ["AREA_CONGEST_LVL"],
-                                                      appwidth)
+                                                      appwidth,
+                                                      appheight)
                                                 ],
                                               );
                                             }
-                                            return Text('  실시간 혼잡도 : ');
+                                            return Text('  실시간 혼잡도 : ',
+                                                style: TextStyle(
+                                                    fontSize:
+                                                        appwidth > appheight
+                                                            ? 18
+                                                            : appwidth >= 500
+                                                                ? 14
+                                                                : appwidth *
+                                                                    0.45 *
+                                                                    0.065));
                                           } else {
                                             return Text("  실시간 혼잡도 : ",
                                                 style: TextStyle(
-                                                    fontSize: appwidth *
-                                                        0.45 *
-                                                        0.07));
+                                                    fontSize:
+                                                        appwidth > appheight
+                                                            ? 18
+                                                            : appwidth >= 500
+                                                                ? 14
+                                                                : appwidth *
+                                                                    0.45 *
+                                                                    0.065));
                                           }
                                         }))
                               ]),
@@ -317,7 +410,11 @@ class _BigWidget extends State<BigWidget> {
                                 "더 알아보기",
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
-                                  fontSize: appheight * 0.012,
+                                  fontSize: appwidth > appheight
+                                      ? 12
+                                      : appwidth >= 500
+                                          ? 8
+                                          : appwidth * 0.45 * 0.068,
                                 ),
                               ),
                             ),

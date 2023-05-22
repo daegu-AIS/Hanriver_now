@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hanriver_now/mainpages/mylikescreen.dart';
+import 'package:video_player/video_player.dart';
 
 class LandingPage extends StatefulWidget {
   int time = 2;
@@ -14,46 +15,30 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  late VideoPlayerController _controller;
   @override
   void initState() {
     Timer(Duration(seconds: widget.time), () {
       Get.offAll(MyLikeScreen());
     });
     super.initState();
+    _controller = VideoPlayerController.asset('assets/images/landing.mp4')
+      ..initialize().then((_) {
+        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+        setState(() {});
+      });
   }
 
   @override
   Widget build(BuildContext context) {
-    const String apiUrl =
-        'http://openapi.seoul.go.kr:8088/776a6b515877686438366d4b4b5847/xml/citydata/1/5/'; //
-    return FutureBuilder(
-      future: http.get(Uri.parse('$apiUrl남산공원')),
-      builder: ((context, snapshot) {
-        if (snapshot.hasData) {
-          return Stack(
-            alignment: Alignment.center,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: Image.asset('assets/images/인트로_AdobeExpress.gif',
-                    fit: BoxFit.fitHeight),
-              ),
-            ],
-          );
-        }
-        return Stack(
-          alignment: Alignment.center,
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Image.asset('assets/images/인트로_AdobeExpress.gif',
-                  fit: BoxFit.fitHeight),
-            ),
-          ],
-        );
-      }),
+    _controller.play();
+    return Container(
+      child: _controller.value.isInitialized
+          ? AspectRatio(
+              aspectRatio: _controller.value.aspectRatio,
+              child: VideoPlayer(_controller),
+            )
+          : Container(),
     );
   }
 }

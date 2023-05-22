@@ -280,14 +280,17 @@ class _GwangNaRu extends State<GwangNaRu> {
               children: [
                 SizedBox(
                   width: appwidth,
-                  height: appheight * 0.5,
+                  height:
+                      appwidth > appheight ? appheight * 0.75 : appheight * 0.5,
                   child: Stack(
                     children: [
                       Column(
                         children: [
                           SizedBox(
                             width: appwidth,
-                            height: appheight * 0.3,
+                            height: appwidth > appheight
+                                ? appheight * 0.45
+                                : appheight * 0.3,
                             child: PageView(
                               scrollDirection: Axis.horizontal,
                               controller: controller,
@@ -306,12 +309,15 @@ class _GwangNaRu extends State<GwangNaRu> {
                         ],
                       ),
                       Positioned(
-                        top: appheight * 0.25,
+                        top: appwidth > appheight
+                            ? appheight * 0.35
+                            : appheight * 0.25,
                         left: appwidth * 0.05,
                         width: appwidth * 0.9,
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 255, 255, 255),
+                            // color: Color.fromARGB(255, 255, 255, 255),
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(20),
                             boxShadow: [
                               BoxShadow(
@@ -322,7 +328,9 @@ class _GwangNaRu extends State<GwangNaRu> {
                               ),
                             ],
                           ),
-                          height: appheight * 0.25,
+                          // height: appwidth > appheight
+                          //     ? appheight * 0.35
+                          //     : appheight * 0.25,
                           alignment: Alignment.topLeft,
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -344,14 +352,14 @@ class _GwangNaRu extends State<GwangNaRu> {
                                   child: Text(
                                     "${widget.areaInfo.areaName} 한강공원",
                                     style: TextStyle(
-                                        fontSize: 35,
+                                        fontSize: appwidth >= 400 ? 35 : 25,
                                         color:
                                             Color.fromARGB(255, 168, 147, 255)),
                                   ),
                                 ),
-                                SizedBox(
+                                Container(
                                   // color: Colors.blue,
-                                  height: appheight * 0.14,
+                                  // height: appheight * 0.14,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
@@ -365,16 +373,20 @@ class _GwangNaRu extends State<GwangNaRu> {
                                           Flexible(
                                               child: RichText(
                                             overflow: TextOverflow.ellipsis,
-                                            maxLines: appheight > 820
+                                            maxLines: appheight > 1000
                                                 ? 6
-                                                : appheight > 700
+                                                : appheight > 820
                                                     ? 5
-                                                    : 4,
+                                                    : appheight > 700
+                                                        ? 5
+                                                        : appheight > 700
+                                                            ? 4
+                                                            : 3,
                                             text: TextSpan(
                                               text: snapshot.data[contentid]
                                                   ['overviw'],
                                               style: TextStyle(
-                                                  fontSize: appwidth * 0.04,
+                                                  fontSize: 17,
                                                   fontFamily: 'KCC-Chassam',
                                                   color: Colors.black),
                                             ),
@@ -386,8 +398,8 @@ class _GwangNaRu extends State<GwangNaRu> {
                                               MainAxisAlignment.end,
                                           children: [
                                             Container(
-                                              padding: EdgeInsets.only(
-                                                  right: 20, top: 10),
+                                              padding:
+                                                  EdgeInsets.only(right: 20),
                                               width: appwidth * 0.3,
                                               child: ElevatedButton(
                                                 style: ButtonStyle(
@@ -410,14 +422,22 @@ class _GwangNaRu extends State<GwangNaRu> {
                                                 child: Text(
                                                   '주차 정보',
                                                   style: TextStyle(
-                                                      fontSize: appwidth * 0.04,
+                                                      fontSize: appwidth >
+                                                              appheight
+                                                          ? 20
+                                                          : appwidth >= 350
+                                                              ? appwidth * 0.04
+                                                              : 8.8,
                                                       color: Colors.black),
                                                 ),
                                               ),
                                             ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
                                             Container(
-                                              padding:
-                                                  EdgeInsets.only(right: 20),
+                                              padding: EdgeInsets.only(
+                                                  right: 20, bottom: 10),
                                               width: appwidth * 0.3,
                                               child: ElevatedButton(
                                                 style: ButtonStyle(
@@ -442,7 +462,12 @@ class _GwangNaRu extends State<GwangNaRu> {
                                                 child: Text(
                                                   '상세 정보',
                                                   style: TextStyle(
-                                                      fontSize: appwidth * 0.04,
+                                                      fontSize: appwidth >
+                                                              appheight
+                                                          ? 20
+                                                          : appwidth >= 350
+                                                              ? appwidth * 0.04
+                                                              : 8.8,
                                                       color: Colors.black),
                                                 ),
                                               ),
@@ -456,7 +481,9 @@ class _GwangNaRu extends State<GwangNaRu> {
                       ),
                       SizedBox(
                           width: appwidth,
-                          height: appheight * 0.3,
+                          height: appwidth > appheight
+                              ? appheight * 0.45
+                              : appheight * 0.3,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -482,9 +509,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                   padding: EdgeInsets.only(left: 20, top: 30),
                   child: Text(
                     "시설 현황",
-                    style: TextStyle(
-                        fontSize: appheight * 0.035,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
@@ -506,7 +531,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                       child: Column(children: [
                         Container(
                           padding: EdgeInsets.only(left: 20, top: 10),
-                          height: appheight * 0.08,
+                          height: 55,
                           child: Row(
                             children: [
                               Container(
@@ -514,11 +539,20 @@ class _GwangNaRu extends State<GwangNaRu> {
                                 alignment: Alignment.topCenter,
                                 child: Text(
                                   "운동시설 : ",
-                                  style: TextStyle(fontSize: appwidth * 0.04),
+                                  style: TextStyle(fontSize: 15),
                                 ),
                               ),
                               Container(
-                                  width: appwidth * 0.55,
+                                  // color: Colors.red,
+                                  width: appwidth <= 360
+                                      ? appwidth * 0.4
+                                      : appwidth <= 420
+                                          ? appwidth * 0.5
+                                          : appwidth <= 480
+                                              ? appwidth * 0.6
+                                              : appwidth <= 580
+                                                  ? appwidth * 0.65
+                                                  : appwidth * 0.7,
                                   alignment: Alignment.topLeft,
                                   padding: EdgeInsets.only(right: 20),
                                   child: Row(
@@ -532,7 +566,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                                           text:
                                               "${snapshot.data[widget.areaInfo.contentid]["infotext"]["gym"]}",
                                           style: TextStyle(
-                                              fontSize: appwidth * 0.04,
+                                              fontSize: 15,
                                               fontFamily: 'KCC-Chassam',
                                               color: Colors.black),
                                         ),
@@ -544,7 +578,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                         ),
                         Container(
                           padding: EdgeInsets.only(left: 20, top: 10),
-                          height: appheight * 0.08,
+                          height: 55,
                           child: Row(
                             children: [
                               Container(
@@ -552,11 +586,19 @@ class _GwangNaRu extends State<GwangNaRu> {
                                 alignment: Alignment.topCenter,
                                 child: Text(
                                   "편의시설 : ",
-                                  style: TextStyle(fontSize: appwidth * 0.04),
+                                  style: TextStyle(fontSize: 15),
                                 ),
                               ),
                               Container(
-                                  width: appwidth * 0.55,
+                                  width: appwidth <= 360
+                                      ? appwidth * 0.4
+                                      : appwidth <= 420
+                                          ? appwidth * 0.5
+                                          : appwidth <= 480
+                                              ? appwidth * 0.6
+                                              : appwidth <= 580
+                                                  ? appwidth * 0.65
+                                                  : appwidth * 0.7,
                                   alignment: Alignment.topLeft,
                                   padding: EdgeInsets.only(right: 20),
                                   child: Row(
@@ -570,7 +612,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                                           text:
                                               "${snapshot.data[widget.areaInfo.contentid]["infotext"]["facilities"]}",
                                           style: TextStyle(
-                                              fontSize: appwidth * 0.04,
+                                              fontSize: 15,
                                               fontFamily: 'KCC-Chassam',
                                               color: Colors.black),
                                         ),
@@ -582,7 +624,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                         ),
                         Container(
                           padding: EdgeInsets.only(left: 20, top: 10),
-                          height: appheight * 0.08,
+                          height: 55,
                           child: Row(
                             children: [
                               Container(
@@ -590,11 +632,19 @@ class _GwangNaRu extends State<GwangNaRu> {
                                 alignment: Alignment.topCenter,
                                 child: Text(
                                   "기타 : ",
-                                  style: TextStyle(fontSize: appwidth * 0.04),
+                                  style: TextStyle(fontSize: 15),
                                 ),
                               ),
                               Container(
-                                  width: appwidth * 0.6,
+                                  width: appwidth <= 360
+                                      ? appwidth * 0.4
+                                      : appwidth <= 420
+                                          ? appwidth * 0.5
+                                          : appwidth <= 480
+                                              ? appwidth * 0.6
+                                              : appwidth <= 580
+                                                  ? appwidth * 0.65
+                                                  : appwidth * 0.7,
                                   alignment: Alignment.topLeft,
                                   padding: EdgeInsets.only(right: 20),
                                   child: Row(
@@ -608,7 +658,7 @@ class _GwangNaRu extends State<GwangNaRu> {
                                           text:
                                               "${snapshot.data[widget.areaInfo.contentid]["infotext"]["else"]}",
                                           style: TextStyle(
-                                              fontSize: appwidth * 0.04,
+                                              fontSize: 15,
                                               fontFamily: 'KCC-Chassam',
                                               color: Colors.black),
                                         ),
@@ -620,6 +670,9 @@ class _GwangNaRu extends State<GwangNaRu> {
                         ),
                       ]),
                     )),
+                SizedBox(
+                  height: 20,
+                )
               ],
             ),
           );
