@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hanriver_now/mainpages/mylikescreen.dart';
+import 'package:hanriver_now/mainpages/widgetpages/datapage.dart';
 import 'package:hanriver_now/mainpages/widgetpages/opensoure.dart';
 import 'package:hanriver_now/mainpages/widgetpages/dev.dart';
 import 'package:hanriver_now/mainpages/widgetpages/service.dart';
@@ -108,6 +109,39 @@ class _ShowGridScreen extends State<ShowGridScreen> {
 
     final appheight = MediaQuery.of(context).size.height;
     final appwidth = MediaQuery.of(context).size.width;
+    void MapPop() {
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
+              //Dialog Main Title
+              title: Column(
+                children: <Widget>[
+                  Text(
+                    "현재 개발중입니다.",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ],
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: Text(
+                    "확인",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            );
+          });
+    }
+
     return WillPopScope(
       onWillPop: () {
         return _onBackKey();
@@ -150,6 +184,8 @@ class _ShowGridScreen extends State<ShowGridScreen> {
                       children: [
                         SizedBox(height: 20),
                         page("서비스 정보", ServiceInfo(), appwidth, appheight),
+                        SizedBox(height: 40),
+                        page("사용 데이터", DataPage(), appwidth, appheight),
                         SizedBox(height: 40),
                         page("QnA", QnA(), appwidth, appheight),
                         SizedBox(height: 40),
@@ -233,9 +269,7 @@ class _ShowGridScreen extends State<ShowGridScreen> {
                     children: [
                       IconButton(
                         icon: Icon(Icons.map),
-                        onPressed: () {
-                          // Get.toNamed('/mylike');
-                        },
+                        onPressed: () => MapPop(),
                       ),
                       SizedBox(
                         width: appwidth / 4,

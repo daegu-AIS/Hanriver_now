@@ -47,6 +47,39 @@ class _MyLikeScreenState extends State<MyLikeScreen> {
     return _myTime;
   }
 
+  void MapPop() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            //Dialog Main Title
+            title: Column(
+              children: <Widget>[
+                Text(
+                  "현재 개발중입니다.",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text(
+                  "확인",
+                  style: TextStyle(fontSize: 15),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   build(BuildContext context) {
     Future<bool> _onBackKey() async {
@@ -119,9 +152,7 @@ class _MyLikeScreenState extends State<MyLikeScreen> {
                   children: [
                     IconButton(
                       icon: Icon(Icons.map),
-                      onPressed: () {
-                        // Get.toNamed('/mylike');
-                      },
+                      onPressed: () => MapPop(),
                     ),
                     SizedBox(
                       width: appwidth / 4,
