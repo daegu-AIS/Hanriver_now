@@ -39,7 +39,6 @@ dependencies:
   xml2json: ^5.3.6
   http: ^0.13.5
   provider: ^6.0.5
-  cp949: ^1.2.1
 
 dev_dependencies:
   flutter_test:
