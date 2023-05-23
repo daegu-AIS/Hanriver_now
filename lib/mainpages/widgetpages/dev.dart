@@ -57,11 +57,14 @@ class DevPage extends StatelessWidget {
     var name = 'assets/guide/qor.jpg';
     return ListView(
       children: <Widget>[
+        SizedBox(
+          height: 20,
+        ),
         DevInfo(
-            'qor.png', '한종혁', '25', '팀장', '전기전자전공', '3', '플러터 어렵노', context),
+            'qor.png', '한종혁', '25', '팀장', '전기공학전공', '3', '플러터 어렵노', context),
         DevInfo(
-            'qor.png', '백종현', '23', '팀원', '컴퓨터 공학과', '2', '플러터 어렵노', context),
-        DevInfo('qor.png', '이인호', '23', '팀원', 'AI공학부', '2', '플러터 어렵노', context)
+            'qor.png', '백종현', '23', '팀원', '컴퓨터 공학전공', '2', '플러터 어렵노', context),
+        DevInfo('qor.png', '이인호', '23', '팀원', 'AI학부', '2', '플러터 어렵노', context)
       ],
     );
   }
@@ -87,12 +90,13 @@ Widget DevInfo(String devimg, String name, String age, String position,
             ),
             elevation: 4.0,
             child: Container(
+                padding: EdgeInsets.all(50),
                 width: appwidth * 0.25,
                 height: appheight * 0.14,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage('assets/guide/$devimg'), // 배경 이미지
+                    image: Image.asset("assets/guide/user.png").image, // 배경 이미지
                   ),
                 )),
           ),
@@ -130,7 +134,7 @@ Widget DevInfo(String devimg, String name, String age, String position,
           child: Align(
             alignment: Alignment.center,
             child: Text(
-              "학교: 대구대학교 \n학과: $major \n학년: $grade \n한마디: $han ",
+              "학교: 대구대학교 \n학과: $major \n학년: $grade ",
               style: TextStyle(fontSize: 20),
             ),
           ),
