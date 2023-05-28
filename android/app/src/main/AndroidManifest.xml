@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.hanriver_now">
+    package="com.ais.hanriver_now">
     <uses-permission android:name="android.permission.INTERNET"/>
     <queries>
         <intent>

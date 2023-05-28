@@ -84,8 +84,8 @@ class _DataPage extends State<DataPage> {
           SizedBox(
             height: 20,
           ),
-          Datafunc(
-              "기상청 단기예보 조회", "https://www.data.go.kr/data/15084084/openapi.do"),
+          Datafunc("한국천문연구원_출몰시각 정보",
+              "https://www.data.go.kr/data/15012688/openapi.do"),
           SizedBox(
             height: 20,
           ),

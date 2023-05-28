@@ -53,8 +53,6 @@ class DevPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     final appwidth = MediaQuery.of(context).size.width;
-    final appheight = MediaQuery.of(context).size.height;
-    var name = 'assets/guide/qor.jpg';
     return ListView(
       children: <Widget>[
         SizedBox(
@@ -64,7 +62,9 @@ class DevPage extends StatelessWidget {
             'qor.png', '한종혁', '25', '팀장', '전기공학전공', '3', '플러터 어렵노', context),
         DevInfo(
             'qor.png', '백종현', '23', '팀원', '컴퓨터 공학전공', '2', '플러터 어렵노', context),
-        DevInfo('qor.png', '이인호', '23', '팀원', 'AI학부', '2', '플러터 어렵노', context)
+        DevInfo('qor.png', '이인호', '23', '팀원', 'AI학부', '2', '플러터 어렵노', context),
+        DevInfo(
+            'qor.png', '김유선', '21', '디자이너', '시각디자인전공', '2', '플러터 어렵노', context),
       ],
     );
   }

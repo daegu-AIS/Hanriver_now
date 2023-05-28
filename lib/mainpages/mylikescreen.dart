@@ -1,6 +1,7 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:hanriver_now/mainpages/park.dart';
 import 'package:hanriver_now/mainpages/widgetpages/topwidget.dart';
 import 'package:hanriver_now/mainpages/widgetpages/bigicon.dart';
 import 'package:hanriver_now/mainpages/showgridscreen.dart';
@@ -151,8 +152,14 @@ class _MyLikeScreenState extends State<MyLikeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
-                      icon: Icon(Icons.map),
-                      onPressed: () => MapPop(),
+                      icon: Icon(Icons.car_crash_outlined),
+                      onPressed: () {
+                        Navigator.push(context, PageRouteBuilder(
+                          pageBuilder: (context, a, b) {
+                            return ParkPage();
+                          },
+                        ));
+                      },
                     ),
                     SizedBox(
                       width: appwidth / 4,

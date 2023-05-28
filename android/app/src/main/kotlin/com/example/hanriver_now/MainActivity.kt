@@ -1,4 +1,4 @@
-package com.example.hanriver_now
+package com.ais.hanriver_now
 
 import io.flutter.embedding.android.FlutterActivity
 

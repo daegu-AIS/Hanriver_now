@@ -5,7 +5,7 @@ import 'package:hanriver_now/mainpages/widgetpages/datapage.dart';
 import 'package:hanriver_now/mainpages/widgetpages/opensoure.dart';
 import 'package:hanriver_now/mainpages/widgetpages/dev.dart';
 import 'package:hanriver_now/mainpages/widgetpages/service.dart';
-import 'package:hanriver_now/mainpages/widgetpages/qna.dart';
+import 'package:hanriver_now/mainpages/park.dart';
 
 class ShowGridScreen extends StatefulWidget {
   @override
@@ -271,8 +271,14 @@ class _ShowGridScreen extends State<ShowGridScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       IconButton(
-                        icon: Icon(Icons.map),
-                        onPressed: () => MapPop(),
+                        icon: Icon(Icons.car_crash_outlined),
+                        onPressed: () {
+                          Navigator.push(context, PageRouteBuilder(
+                            pageBuilder: (context, a, b) {
+                              return ParkPage();
+                            },
+                          ));
+                        },
                       ),
                       SizedBox(
                         width: appwidth / 4,

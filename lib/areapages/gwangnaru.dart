@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hanriver_now/areapages/overview.dart';
 import 'package:hanriver_now/mainpages/mylikescreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
@@ -62,7 +61,6 @@ class _GwangNaRu extends State<GwangNaRu> {
               //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
               barrierDismissible: false,
               builder: (BuildContext context) {
-                fetchData(snapshot.data[contentid]["infotext2"].length);
                 return AlertDialog(
                   // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
                   shape: RoundedRectangleBorder(
@@ -76,8 +74,6 @@ class _GwangNaRu extends State<GwangNaRu> {
                       ),
                     ],
                   ),
-                  //
-
                   content: Container(
                     constraints: BoxConstraints(
                         maxHeight: appheight * 0.3,

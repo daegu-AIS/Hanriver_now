@@ -153,7 +153,7 @@ class SV extends StatelessWidget {
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    "지도 보기",
+                                    "주차 정보",
                                     style: TextStyle(
                                         fontSize: 20, color: Colors.black),
                                   ),
@@ -189,7 +189,7 @@ class SV extends StatelessWidget {
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    "???",
+                                    "Info",
                                     style: TextStyle(
                                         fontSize: 20, color: Colors.black),
                                   ),
