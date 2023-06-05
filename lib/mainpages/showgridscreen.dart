@@ -252,7 +252,7 @@ class _ShowGridScreen extends State<ShowGridScreen> {
                             // color: Color.fromARGB(255, 191, 188, 202),
                             padding: EdgeInsets.only(left: 20, top: 20),
                             child: Text(
-                              "1.0.0 version",
+                              "1.0.2 version",
                               style: TextStyle(fontSize: 15),
                             ),
                           ),

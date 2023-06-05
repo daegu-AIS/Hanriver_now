@@ -253,12 +253,16 @@ class _MyLikeScreenState extends State<MyLikeScreen> {
                 var time = snapshot.data!.hour.toString() +
                     snapshot.data!.minute.toString();
                 var yyyymmdd = "";
-                if (snapshot.data!.month < 10) {
+                if (snapshot.data!.month < 10 && snapshot.data!.day < 10) {
+                  yyyymmdd =
+                      "${snapshot.data!.year}0${snapshot.data!.month}0${snapshot.data!.day}";
+                } else if (snapshot.data!.month < 10) {
                   yyyymmdd =
                       "${snapshot.data!.year}0${snapshot.data!.month}${snapshot.data!.day}";
+                } else if (snapshot.data!.day < 10) {
+                  "${snapshot.data!.year}${snapshot.data!.month}0${snapshot.data!.day}";
                 } else {
-                  yyyymmdd =
-                      "${snapshot.data!.year}${snapshot.data!.month}${snapshot.data!.day}";
+                  "${snapshot.data!.year}${snapshot.data!.month}${snapshot.data!.day}";
                 }
                 return FutureBuilder(
                   future: fetchPost(yyyymmdd),
@@ -267,7 +271,6 @@ class _MyLikeScreenState extends State<MyLikeScreen> {
                       final getXmlData = snapshot1.data!.body;
                       final xml = Xml2Json()..parse(getXmlData);
                       final jsonData = xml.toParker();
-
                       var data = jsonDecode(jsonData);
                       var sunrise =
                           data['response']['body']['items']['item']['sunrise'];

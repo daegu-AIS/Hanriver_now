@@ -332,7 +332,7 @@ class _ParkPage extends State<ParkPage> {
                                   child: Text(
                                     "실시간 주차 가능 대수",
                                     style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: appwidth * 0.04,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 )
